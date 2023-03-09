@@ -3,12 +3,12 @@ import {View, Text} from 'react-native';
 
 // import { Container } from './styles';
 
-const SignUp = () => {
+const Cursos = () => {
   return (
     <View>
-      <Text>SignUp</Text>
+      <Text>Cursos</Text>
     </View>
   );
 };
 
-export default SignUp;
+export default Cursos;

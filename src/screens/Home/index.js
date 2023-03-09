@@ -3,7 +3,7 @@ import {View} from 'react-native';
 import MyButtom from '../../components/MyButtom';
 import {Text} from './styles';
 
-const Home = () => {
+const Home = ({navigation}) => {
   const [cont, setCont] = useState(0);
 
   //useEffect(() => {}, []);
@@ -34,6 +34,10 @@ const Home = () => {
       <Text>Contador: {cont}</Text>
       <MyButtom text="Incrementar" onClick={incrementar} />
       <MyButtom text="Decrementar" onClick={decrementar} />
+      <MyButtom
+        text="Vai para Screen Curso"
+        onClick={() => navigation.navigate('Cursos')}
+      />
     </View>
   );
 };

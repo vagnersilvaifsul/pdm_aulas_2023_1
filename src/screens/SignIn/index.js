@@ -1,3 +1,4 @@
+import {CommonActions} from '@react-navigation/native';
 import React from 'react';
 import {View, Text} from 'react-native';
 import MyButtom from '../../components/MyButtom';
@@ -10,7 +11,14 @@ const SignIn = ({navigation}) => {
       <Text>SignIn</Text>
       <MyButtom
         text="mude de screen"
-        onClick={() => navigation.navigate('Home')}
+        onClick={() =>
+          navigation.dispatch(
+            CommonActions.reset({
+              index: 0,
+              routes: [{name: 'AppStack'}],
+            }),
+          )
+        }
       />
     </View>
   );
