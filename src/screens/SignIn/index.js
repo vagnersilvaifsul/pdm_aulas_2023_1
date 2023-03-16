@@ -15,6 +15,7 @@ import {CommonActions} from '@react-navigation/native';
 import {COLORS} from '../../assets/colors';
 import Loading from '../../components/Loading';
 // import { Container } from './styles';
+import EncryptedStorage from 'react-native-encrypted-storage';
 
 const SignIn = ({navigation}) => {
   const [email, setEmail] = useState('');
@@ -22,11 +23,26 @@ const SignIn = ({navigation}) => {
   const [loading, setLoading] = useState(false);
   //console.log(auth);
 
+  async function storeUserSession(email, pass) {
+    try {
+      await EncryptedStorage.setItem(
+        'user_session',
+        JSON.stringify({
+          email,
+          pass,
+        }),
+      );
+    } catch (error) {
+      console.error('SignIn, storeUserSession: ' + error);
+    }
+  }
+
   const entrar = async () => {
     if (email && password) {
       try {
         setLoading(true);
         await auth().signInWithEmailAndPassword(email, password);
+        await storeUserSession(email, password);
         setLoading(false);
         navigation.dispatch(
           CommonActions.reset({
@@ -35,7 +51,8 @@ const SignIn = ({navigation}) => {
           }),
         );
       } catch (e) {
-        console.log('SignIn, entrar: ' + e);
+        setLoading(false);
+        console.error('SignIn, entrar: ' + e);
         switch (e.code) {
           case 'auth/user-not-found':
             Alert.alert('Erro', 'Usuário não cadastrado.');

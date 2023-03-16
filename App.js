@@ -12,7 +12,11 @@ const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const AuthStack = () => (
-  <Stack.Navigator initialRouteName="SignIn">
+  <Stack.Navigator
+    initialRouteName="Preload"
+    screenOptions={{
+      headerShown: false,
+    }}>
     <Stack.Screen component={Preload} name="Preload" />
     <Stack.Screen component={SignIn} name="SignIn" />
     <Stack.Screen component={SignUp} name="SignUp" />
