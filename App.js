@@ -29,7 +29,13 @@ const AppStack = () => (
     screenOptions={{
       headerShown: false,
     }}>
-    <Tab.Screen component={Home} name="Home" />
+    <Tab.Screen
+      component={Home}
+      name="Home"
+      options={{
+        tabBarLabel: 'Alunos',
+      }}
+    />
     <Tab.Screen component={Cursos} name="Cursos" />
   </Tab.Navigator>
 );
