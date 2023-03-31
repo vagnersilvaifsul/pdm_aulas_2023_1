@@ -1,12 +1,14 @@
+/* eslint-disable react/no-unstable-nested-components */
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import SignIn from '../screens/SignIn';
-import Home from '../screens/Home';
+import Estudantes from '../screens/Estudantes';
 import Preload from '../screens/Preload';
 import SignUp from '../screens/SignUp';
-import Cursos from '../screens/Cursos/styles';
+import Estudante from '../screens/Estudante';
+import Cursos from '../screens/Cursos';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {COLORS} from '../assets/colors';
 
@@ -27,13 +29,13 @@ const AuthStack = () => (
 
 const AppStack = () => (
   <Tab.Navigator
-    initialRouteName="Home"
+    initialRouteName="Estudantes"
     screenOptions={{
       headerShown: false,
     }}>
     <Tab.Screen
-      component={Home}
-      name="Home"
+      component={Estudantes}
+      name="Estudantes"
       options={{
         tabBarLabel: 'Alunos',
         tabBarIcon: () => (
@@ -63,6 +65,14 @@ const Navigator = () => (
       }}>
       <Stack.Screen component={AuthStack} name="AuthStack" />
       <Stack.Screen component={AppStack} name="AppStack" />
+      <Stack.Screen
+        component={Estudante}
+        name="Estudante"
+        options={{
+          tabBarLabel: 'Estudante',
+          presentation: 'modal',
+        }}
+      />
     </Stack.Navigator>
   </NavigationContainer>
 );
