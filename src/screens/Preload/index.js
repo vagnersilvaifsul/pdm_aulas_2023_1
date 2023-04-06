@@ -19,7 +19,6 @@ const Preload = ({navigation}) => {
 
   const entrar = async () => {
     const userSession = await retrieveUserSession();
-    console.log(userSession);
     if (userSession) {
       try {
         await auth().signInWithEmailAndPassword(

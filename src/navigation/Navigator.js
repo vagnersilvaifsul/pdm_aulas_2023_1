@@ -69,7 +69,6 @@ const Navigator = () => (
         component={Estudante}
         name="Estudante"
         options={{
-          tabBarLabel: 'Estudante',
           presentation: 'modal',
         }}
       />

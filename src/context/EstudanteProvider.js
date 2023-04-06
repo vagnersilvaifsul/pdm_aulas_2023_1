@@ -15,7 +15,6 @@ export const EstudanteProvider = ({children}) => {
         //console.log(snapShot._docs);
         let data = [];
         snapShot.forEach(doc => {
-          console.log(doc.id, ' => ', doc.data());
           data.push({
             uid: doc.id,
             nome: doc.data().nome,
@@ -30,8 +29,34 @@ export const EstudanteProvider = ({children}) => {
     };
   }, []);
 
+  const save = async estudante => {
+    try {
+      await firestore().collection('estudantes').doc(estudante.uid).set(
+        {
+          nome: estudante.nome,
+          curso: estudante.curso,
+        },
+        {merge: true},
+      );
+      return true;
+    } catch (e) {
+      console.error('EstudanteProvider, salvar: ' + e);
+      return false;
+    }
+  };
+
+  const del = async uid => {
+    try {
+      await firestore().collection('estudantes').doc(uid).delete();
+      return true;
+    } catch (e) {
+      console.error('EstudanteProvider, del: ', e);
+      return false;
+    }
+  };
+
   return (
-    <EstudanteContext.Provider value={{estudantes}}>
+    <EstudanteContext.Provider value={{estudantes, save, del}}>
       {children}
     </EstudanteContext.Provider>
   );

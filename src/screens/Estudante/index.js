@@ -1,15 +1,71 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {Container, TextInput} from './styles';
+import {Alert, ToastAndroid} from 'react-native';
 import MyButton from '../../components/MyButtom';
 import Loading from '../../components/Loading';
+import DeleteButton from '../../components/DeleteButton';
+import {EstudanteContext} from '../../context/EstudanteProvider';
 
-const Estudante = props => {
+const Estudante = ({route, navigation}) => {
   const [nome, setNome] = useState('');
   const [curso, setCurso] = useState('');
   const [uid, setUid] = useState('');
   const [loading, setLoading] = useState(false);
+  const {save, del} = useContext(EstudanteContext);
 
-  console.log(props.route.params);
+  useEffect(() => {
+    setNome(route.params.value.nome);
+    setCurso(route.params.value.curso);
+    setUid(route.params.value.uid);
+  }, [route]);
+
+  const salvar = async () => {
+    setLoading(true);
+    if (
+      await save({
+        uid,
+        nome,
+        curso,
+      })
+    ) {
+      Alert.alert('Show!', 'Você salvou com sucesso.');
+      setLoading(false);
+      navigation.goBack();
+    } else {
+      setLoading(false);
+      Alert.alert('Ops!', 'Deu problema ao salvar.');
+    }
+  };
+
+  const excluir = async () => {
+    Alert.alert(
+      'Opa! Fique esperto.',
+      'Você tem certeza que deseja excluir o aluno?',
+      [
+        {
+          text: 'Não',
+          onPress: () => {},
+          style: 'cancel',
+        },
+        {
+          text: 'Sim',
+          onPress: async () => {
+            setLoading(true);
+            if (await del(uid)) {
+              ToastAndroid.show(
+                'Ordem dada é ordem cumprida',
+                ToastAndroid.LONG,
+              );
+            } else {
+              ToastAndroid.show('Deu problema ao excluir.', ToastAndroid.SHORT);
+            }
+            setLoading(false);
+            navigation.goBack();
+          },
+        },
+      ],
+    );
+  };
 
   return (
     <Container>
@@ -30,9 +86,17 @@ const Estudante = props => {
       <MyButton
         text="Salvar"
         onClick={() => {
-          'foi';
+          salvar();
         }}
       />
+      {uid && (
+        <DeleteButton
+          texto="Excluir"
+          onClick={() => {
+            excluir();
+          }}
+        />
+      )}
       {loading && <Loading />}
     </Container>
   );

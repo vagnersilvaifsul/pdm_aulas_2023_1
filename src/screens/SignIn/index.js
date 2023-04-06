@@ -23,12 +23,12 @@ const SignIn = ({navigation}) => {
   const [loading, setLoading] = useState(false);
   //console.log(auth);
 
-  async function storeUserSession(email, pass) {
+  async function storeUserSession(localEmail, pass) {
     try {
       await EncryptedStorage.setItem(
         'user_session',
         JSON.stringify({
-          email,
+          email: localEmail,
           pass,
         }),
       );
@@ -72,11 +72,11 @@ const SignIn = ({navigation}) => {
   };
 
   const recuperarSenha = () => {
-    alert('foi');
+    //TODO: implementar essa função
   };
 
   const cadastrar = () => {
-    alert('foi');
+    //TODO: implementar essa função
   };
 
   return (

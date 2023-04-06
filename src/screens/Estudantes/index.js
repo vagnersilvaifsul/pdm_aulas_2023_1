@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {EstudanteContext} from '../../context/EstudanteProvider';
 import Item from './Item';
@@ -6,11 +6,6 @@ import AddFloatButton from '../../components/AddFloatButton';
 
 const Estudantes = ({navigation}) => {
   const {estudantes} = useContext(EstudanteContext);
-
-  useEffect(() => {
-    console.log('useEffect, Estudantes');
-    console.log(estudantes);
-  }, [estudantes]);
 
   const routeStudent = value => {
     navigation.navigate('Estudante', {
