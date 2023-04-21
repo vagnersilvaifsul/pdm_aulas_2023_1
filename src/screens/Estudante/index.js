@@ -14,9 +14,11 @@ const Estudante = ({route, navigation}) => {
   const {save, del} = useContext(EstudanteContext);
 
   useEffect(() => {
-    setNome(route.params.value.nome);
-    setCurso(route.params.value.curso);
-    setUid(route.params.value.uid);
+    if (route.params.value) {
+      setNome(route.params.value.nome);
+      setCurso(route.params.value.curso);
+      setUid(route.params.value.uid);
+    }
   }, [route]);
 
   const salvar = async () => {
@@ -28,12 +30,12 @@ const Estudante = ({route, navigation}) => {
         curso,
       })
     ) {
-      Alert.alert('Show!', 'Você salvou com sucesso.');
       setLoading(false);
+      ToastAndroid.show('Show! Você salvou com sucesso.', ToastAndroid.LONG);
       navigation.goBack();
     } else {
       setLoading(false);
-      Alert.alert('Ops!', 'Deu problema ao salvar.');
+      ToastAndroid.show('Ops!Deu problema ao salvar.', ToastAndroid.LONG);
     }
   };
 
