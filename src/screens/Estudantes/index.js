@@ -12,11 +12,18 @@ const Estudantes = ({navigation}) => {
   const filterByName = text => {
     if (text !== '') {
       let a = [];
-      estudantes.forEach(e => {
-        if (e.nome.toLowerCase().includes(text.toLowerCase())) {
-          a.push(e);
-        }
-      });
+      // estudantes.forEach(e => {
+      //   if (e.nome.toLowerCase().includes(text.toLowerCase())) {
+      //     a.push(e);
+      //   }
+      // });
+
+      a.push(
+        ...estudantes.filter(e =>
+          e.nome.toLowerCase().includes(text.toLowerCase()),
+        ),
+      );
+
       if (a.length > 0) {
         setEstudantesTemp(a);
       }
