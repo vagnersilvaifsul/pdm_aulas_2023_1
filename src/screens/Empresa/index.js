@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useContext} from 'react';
 import {Alert, ToastAndroid} from 'react-native';
 import {Container, TextInput} from './styles';
-import MeuButton from '../../components/MeuButton';
+import MyButtom from '../../components/MyButtom';
 import DeleteButton from '../../components/DeleteButton';
 import Loading from '../../components/Loading';
 import {EmpresaContext} from '../../context/EmpresaProvider';
@@ -102,7 +102,7 @@ const Empresa = ({route, navigation}) => {
         onChangeText={t => setTeconologias(t)}
         value={tecnologias}
       />
-      <MeuButton texto="Salvar" onClick={salvar} />
+      <MyButtom texto="Salvar" onClick={salvar} />
       {uid ? <DeleteButton texto="Excluir" onClick={excluir} /> : null}
       {loading && <Loading />}
     </Container>

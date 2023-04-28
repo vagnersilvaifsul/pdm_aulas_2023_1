@@ -10,6 +10,7 @@ import SignUp from '../screens/SignUp';
 import Estudante from '../screens/Estudante';
 import Empresas from '../screens/Empresas';
 import Empresa from '../screens/Empresa';
+import Cursos from '../screens/Cursos';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {COLORS} from '../assets/colors';
 
@@ -49,6 +50,16 @@ const AppStack = () => (
       name="Empresas"
       options={{
         tabBarLabel: 'Empresas',
+        tabBarIcon: () => (
+          <Icon name="business" color={COLORS.primary} size={20} />
+        ),
+      }}
+    />
+    <Tab.Screen
+      component={Cursos}
+      name="Cursos"
+      options={{
+        tabBarLabel: 'Cursos',
         tabBarIcon: () => (
           <Icon name="rocket" color={COLORS.primary} size={20} />
         ),

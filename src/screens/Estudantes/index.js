@@ -7,7 +7,6 @@ import SearchBar from '../../components/SearchBar';
 
 const Estudantes = ({navigation}) => {
   const {estudantes} = useContext(EstudanteContext);
-  estudantes;
   const [estudantesTemp, setEstudantesTemp] = useState([]);
 
   const filterByName = text => {

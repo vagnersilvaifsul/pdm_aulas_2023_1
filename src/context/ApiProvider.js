@@ -15,10 +15,11 @@ export const ApiProvider = ({children}) => {
           if (idToken) {
             const apiLocal = create({
               baseURL:
-                'https://firestore.googleapis.com/v1/projects/projeto-exemplo-1dbdd/databases/(default)/documents/',
+                'https://firestore.googleapis.com/v1/projects/pdm-aulas-797c8/databases/(default)/documents/',
               headers: {Authorization: 'Bearer ' + idToken},
             });
 
+            //console.log(apiLocal);
             //utiliza o middleware para lançar um exceção (usa try-catch no consumidor)
             apiLocal.addResponseTransform(response => {
               if (!response.ok) {

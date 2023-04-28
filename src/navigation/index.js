@@ -3,7 +3,7 @@ import {AuthUserProvider} from '../context/AuthUserProvider';
 import {EstudanteProvider} from '../context/EstudanteProvider';
 import Navigator from './Navigator';
 import {ApiProvider} from '../context/ApiProvider';
-import {EmpresaProvider} from '../context/EmpresasProvider';
+import {EmpresaProvider} from '../context/EmpresaProvider';
 
 export default function Providers() {
   return (

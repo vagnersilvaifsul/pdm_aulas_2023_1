@@ -1,13 +1,37 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {CommonActions} from '@react-navigation/native';
-
 import {Container, FlatList} from './styles';
 import Item from './Item';
 import AddFloatButton from '../../components/AddFloatButton';
 import {EmpresaContext} from '../../context/EmpresaProvider';
+import SearchBar from '../../components/SearchBar';
 
 const Empresas = ({navigation}) => {
-  const {companies} = useContext(EmpresaContext);
+  const {empresas} = useContext(EmpresaContext);
+  const [empresasTemp, setEmpresasTemp] = useState([]);
+
+  const filterByName = text => {
+    if (text !== '') {
+      let a = [];
+      // estudantes.forEach(e => {
+      //   if (e.nome.toLowerCase().includes(text.toLowerCase())) {
+      //     a.push(e);
+      //   }
+      // });
+
+      a.push(
+        ...empresas.filter(e =>
+          e.nome.toLowerCase().includes(text.toLowerCase()),
+        ),
+      );
+
+      if (a.length > 0) {
+        setEmpresasTemp(a);
+      }
+    } else {
+      setEmpresasTemp([]);
+    }
+  };
 
   const routeCompany = item => {
     //console.log(item);
@@ -34,8 +58,9 @@ const Empresas = ({navigation}) => {
 
   return (
     <Container>
+      <SearchBar setSearch={filterByName} />
       <FlatList
-        data={companies}
+        data={empresasTemp.length > 0 ? empresasTemp : empresas}
         renderItem={renderItem}
         keyExtractor={item => item.uid}
       />

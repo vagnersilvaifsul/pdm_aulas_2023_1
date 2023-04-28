@@ -6,7 +6,7 @@ import {ApiContext} from '../context/ApiProvider';
 export const EmpresaContext = createContext({});
 
 export const EmpresaProvider = ({children}) => {
-  const [companies, setCompanies] = useState([]);
+  const [empresas, setEmpresas] = useState([]);
   const {api} = useContext(ApiContext);
 
   //console.log(api);
@@ -26,7 +26,7 @@ export const EmpresaProvider = ({children}) => {
       let data = [];
       response.data.documents.map(d => {
         let k = d.name.split(
-          'projects/projeto-exemplo-1dbdd/databases/(default)/documents/companies/',
+          'projects/pdm-aulas-797c8/databases/(default)/documents/empresas/',
         );
         //console.log(k[1]);
         //console.log(d.fields.nome.stringValue);
@@ -38,9 +38,10 @@ export const EmpresaProvider = ({children}) => {
         });
       });
       data.sort((a, b) => b.nome.localeCompare(a.nome));
-      setCompanies(data);
+      setEmpresas(data);
     } catch (response) {
-      console.error('Erro em getCompanies via API: ' + response);
+      console.error('Erro em getCompanies via API:');
+      console.error(response);
     }
   };
 
@@ -151,7 +152,7 @@ export const EmpresaProvider = ({children}) => {
   return (
     <EmpresaContext.Provider
       value={{
-        companies,
+        empresas,
         saveCompany,
         updateCompany,
         deleteCompany,
