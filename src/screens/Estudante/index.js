@@ -30,13 +30,12 @@ const Estudante = ({route, navigation}) => {
         curso,
       })
     ) {
-      setLoading(false);
       ToastAndroid.show('Show! Você salvou com sucesso.', ToastAndroid.LONG);
       navigation.goBack();
     } else {
-      setLoading(false);
       ToastAndroid.show('Ops!Deu problema ao salvar.', ToastAndroid.LONG);
     }
+    setLoading(false);
   };
 
   const excluir = async () => {

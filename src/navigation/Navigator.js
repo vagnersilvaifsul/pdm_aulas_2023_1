@@ -8,7 +8,8 @@ import Estudantes from '../screens/Estudantes';
 import Preload from '../screens/Preload';
 import SignUp from '../screens/SignUp';
 import Estudante from '../screens/Estudante';
-import Cursos from '../screens/Cursos';
+import Empresas from '../screens/Empresas';
+import Empresa from '../screens/Empresa';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {COLORS} from '../assets/colors';
 
@@ -44,10 +45,10 @@ const AppStack = () => (
       }}
     />
     <Tab.Screen
-      component={Cursos}
-      name="Cursos"
+      component={Empresas}
+      name="Empresas"
       options={{
-        tabBarLabel: 'Cursos',
+        tabBarLabel: 'Empresas',
         tabBarIcon: () => (
           <Icon name="rocket" color={COLORS.primary} size={20} />
         ),
@@ -68,6 +69,13 @@ const Navigator = () => (
       <Stack.Screen
         component={Estudante}
         name="Estudante"
+        options={{
+          presentation: 'modal',
+        }}
+      />
+      <Stack.Screen
+        component={Empresa}
+        name="Empresa"
         options={{
           presentation: 'modal',
         }}
