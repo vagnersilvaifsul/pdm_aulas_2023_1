@@ -1,6 +1,5 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import MyButtom from '../../components/MyButtom';
-import auth from '@react-native-firebase/auth';
 import {
   SafeAreaView,
   ScrollView,
@@ -14,35 +13,20 @@ import {
 import {CommonActions} from '@react-navigation/native';
 import {COLORS} from '../../assets/colors';
 import Loading from '../../components/Loading';
-// import { Container } from './styles';
-import EncryptedStorage from 'react-native-encrypted-storage';
+import {AuthUserContext} from '../../context/AuthUserProvider';
 
 const SignIn = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  //console.log(auth);
-
-  async function storeUserSession(localEmail, pass) {
-    try {
-      await EncryptedStorage.setItem(
-        'user_session',
-        JSON.stringify({
-          email: localEmail,
-          pass,
-        }),
-      );
-    } catch (error) {
-      console.error('SignIn, storeUserSession: ' + error);
-    }
-  }
+  const {signIn} = useContext(AuthUserContext);
 
   const entrar = async () => {
+    let msgError = '';
     if (email && password) {
-      try {
-        setLoading(true);
-        await auth().signInWithEmailAndPassword(email, password);
-        await storeUserSession(email, password);
+      setLoading(true);
+      msgError = await signIn(email, password);
+      if (msgError === 'ok') {
         setLoading(false);
         navigation.dispatch(
           CommonActions.reset({
@@ -50,33 +34,11 @@ const SignIn = ({navigation}) => {
             routes: [{name: 'AppStack'}],
           }),
         );
-      } catch (e) {
+      } else {
         setLoading(false);
-        console.error('SignIn, entrar: ' + e);
-        switch (e.code) {
-          case 'auth/user-not-found':
-            Alert.alert('Erro', 'Usuário não cadastrado.');
-            break;
-          case 'auth/wrong-password':
-            Alert.alert('Erro', 'Erro na senha.');
-            break;
-          case 'auth/invalid-email':
-            Alert.alert('Erro', 'Email inválido.');
-            break;
-          case 'auth/user-disabled':
-            Alert.alert('Erro', 'Usuário desabilitado.');
-            break;
-        }
+        Alert.alert('Ops!', msgError);
       }
     }
-  };
-
-  const recuperarSenha = () => {
-    //TODO: implementar essa função
-  };
-
-  const cadastrar = () => {
-    //TODO: implementar essa função
   };
 
   return (
@@ -103,7 +65,9 @@ const SignIn = ({navigation}) => {
             returnKeyType="go"
             onChangeText={t => setPassword(t)}
           />
-          <Text style={styles.textEsqueceuSenha} onPress={recuperarSenha}>
+          <Text
+            style={styles.textEsqueceuSenha}
+            onPress={() => navigation.navigate('ForgotPassWord')}>
             Esqueceu sua senha?
           </Text>
           <MyButtom text="ENTRAR" onClick={entrar} />
@@ -116,7 +80,9 @@ const SignIn = ({navigation}) => {
           </View>
           <View style={styles.divCadastrarSe}>
             <Text style={styles.textNormal}>Não tem uma conta?</Text>
-            <Text style={styles.textCadastrarSe} onPress={cadastrar}>
+            <Text
+              style={styles.textCadastrarSe}
+              onPress={() => navigation.navigate('SignUp')}>
               Cadastre-se
             </Text>
           </View>
@@ -167,7 +133,7 @@ const styles = StyleSheet.create({
   },
   divOuHr: {
     width: '100%',
-    height: 20,
+    height: 25,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',

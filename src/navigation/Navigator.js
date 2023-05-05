@@ -11,6 +11,8 @@ import Estudante from '../screens/Estudante';
 import Empresas from '../screens/Empresas';
 import Empresa from '../screens/Empresa';
 import Cursos from '../screens/Cursos';
+import ForgotPassWord from '../screens/ForgotPassword';
+import Menu from '../screens/Menu';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {COLORS} from '../assets/colors';
 
@@ -26,6 +28,7 @@ const AuthStack = () => (
     <Stack.Screen component={Preload} name="Preload" />
     <Stack.Screen component={SignIn} name="SignIn" />
     <Stack.Screen component={SignUp} name="SignUp" />
+    <Stack.Screen component={ForgotPassWord} name="ForgotPassWord" />
   </Stack.Navigator>
 );
 
@@ -63,6 +66,14 @@ const AppStack = () => (
         tabBarIcon: () => (
           <Icon name="rocket" color={COLORS.primary} size={20} />
         ),
+      }}
+    />
+    <Tab.Screen
+      component={Menu}
+      name="Menu"
+      options={{
+        tabBarLabel: 'Menu',
+        tabBarIcon: () => <Icon name="list" color={COLORS.primary} size={20} />,
       }}
     />
   </Tab.Navigator>

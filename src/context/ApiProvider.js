@@ -43,7 +43,7 @@ export const ApiProvider = ({children}) => {
         getApi();
       }
     });
-    return unsubscriber; //unsubscribe o handler ao desmontar
+    return unsubscriber; //unsubscribe o listener ao desmontar
   }, []);
 
   return (
