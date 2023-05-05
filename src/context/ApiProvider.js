@@ -37,7 +37,13 @@ export const ApiProvider = ({children}) => {
   };
 
   useEffect(() => {
-    getApi();
+    // cria im listener para o estado da sessão
+    const unsubscriber = auth().onAuthStateChanged(authUser => {
+      if (authUser) {
+        getApi();
+      }
+    });
+    return unsubscriber; //unsubscribe o handler ao desmontar
   }, []);
 
   return (
