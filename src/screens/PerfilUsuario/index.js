@@ -119,6 +119,7 @@ const PerfilUsuario = ({navigation}) => {
       if (oldPass !== user.pass) {
         Alert.alert('Veja!', 'A senha antiga é diferente da senha digitada.');
       } else if (newPass === newPassConfirm) {
+        //TODO: fazer validar senha forte (uma caixa alta, um número, um caractere especial, tam. mín. 6)
         Alert.alert('Ok!', 'Por favor, confirme a alteração de sua senha.', [
           {
             text: 'Não',
