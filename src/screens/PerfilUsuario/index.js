@@ -16,13 +16,12 @@ const PerfilUsuario = ({navigation}) => {
   const [newPass, setNewPass] = useState('');
   const [newPassConfirm, setNePassConfirm] = useState('');
   const [loading, setLoading] = useState(false);
-  const {save, del} = useContext(UserContext);
+  const {save, del, updatePassword} = useContext(UserContext);
 
   useEffect(() => {
     if (user) {
       setNome(user.nome);
       setEmail(user.email);
-
     }
   }, [user]);
 
@@ -115,6 +114,44 @@ const PerfilUsuario = ({navigation}) => {
     );
   }
 
+  function alterarSenha() {
+    if (oldPass !== '' && newPass !== '' && newPassConfirm !== '') {
+      if (oldPass !== user.pass) {
+        Alert.alert('Veja!', 'A senha antiga é diferente da senha digitada.');
+      } else if (newPass === newPassConfirm) {
+        Alert.alert('Ok!', 'Por favor, confirme a alteração de sua senha.', [
+          {
+            text: 'Não',
+            onPress: () => {},
+            style: 'cancel',
+          },
+          {
+            text: 'Sim',
+            onPress: async () => {
+              if (await updatePassword(newPass)) {
+                ToastAndroid.show(
+                  'Show! Você alterou sua senha com sucesso.',
+                  ToastAndroid.LONG,
+                );
+                navigation.goBack();
+              } else {
+                ToastAndroid.show(
+                  'Ops! Erro ao alterar sua senha. Contate o administrador.',
+                  ToastAndroid.LONG,
+                );
+              }
+            },
+            style: 'cancel',
+          },
+        ]);
+      } else {
+        Alert.alert('Ops!', 'A nova senha é diferente da confirmação');
+      }
+    } else {
+      Alert.alert('Veja!', 'Preencha os campos relativos a senha');
+    }
+  }
+
   return (
     <Body>
       <Text>Perfil do Usuário</Text>
@@ -143,7 +180,7 @@ const PerfilUsuario = ({navigation}) => {
       <TextInput
         value={newPass}
         secureTextEntry={true}
-        placeholder="Nova senha"
+        placeholder="Nova senha (mín. 6 caracteres)"
         keyboardType="default"
         returnKeyType="next"
         onChangeText={t => setNewPass(t)}
@@ -158,6 +195,7 @@ const PerfilUsuario = ({navigation}) => {
       />
       <MyButtom text="Salvar" onClick={salvar} />
       <DeleteButton texto="Excluir Conta" onClick={excluir} />
+      <DeleteButton texto="Alterar Senha" onClick={alterarSenha} />
       {loading && <Loading />}
     </Body>
   );

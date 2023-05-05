@@ -32,12 +32,23 @@ export const UserProvider = ({children}) => {
       await signOut();
       return true;
     } catch (e) {
-      console.error('del' + e);
       return false;
     }
   };
 
+  async function updatePassword(pass) {
+    try {
+      await auth().currentUser.updatePassword(pass);
+      return true;
+    } catch (e) {
+      console.error('updatePassword' + e);
+      return false;
+    }
+  }
+
   return (
-    <UserContext.Provider value={{save, del}}>{children}</UserContext.Provider>
+    <UserContext.Provider value={{save, del, updatePassword}}>
+      {children}
+    </UserContext.Provider>
   );
 };
