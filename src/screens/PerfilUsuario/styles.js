@@ -21,4 +21,3 @@ export const TextInput = styled.TextInput`
 export const Text = styled.Text`
   font-size: 25px;
 `;
- 
