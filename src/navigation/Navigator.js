@@ -15,6 +15,7 @@ import ForgotPassWord from '../screens/ForgotPassword';
 import Menu from '../screens/Menu';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {COLORS} from '../assets/colors';
+import PerfilUsuario from '../screens/PerfilUsuario';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -98,6 +99,13 @@ const Navigator = () => (
       <Stack.Screen
         component={Empresa}
         name="Empresa"
+        options={{
+          presentation: 'modal',
+        }}
+      />
+      <Stack.Screen
+        component={PerfilUsuario}
+        name="PerfilUsuario"
         options={{
           presentation: 'modal',
         }}

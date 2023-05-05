@@ -58,10 +58,14 @@ export const AuthUserProvider = ({children}) => {
         return 'Você deve validar seu email para continuar.';
       }
       await storeUserSession(email, pass);
-      if (!(await getUser(pass))) {
+      let userLocal = await getUser();
+      if (userLocal) {
+        userLocal.pass = pass;
+        setUser(userLocal);
+        return 'ok';
+      } else {
         return 'Problemas ao buscar o seu perfil. Contate o administrador.';
       }
-      return 'ok';
     } catch (e) {
       return launchServerMessageErro(e);
     }
@@ -96,7 +100,6 @@ export const AuthUserProvider = ({children}) => {
         .get();
       if (doc.exists) {
         //console.log('Document data:', doc.data());
-        doc.data().pass = pass;
         return doc.data();
       }
       return null;

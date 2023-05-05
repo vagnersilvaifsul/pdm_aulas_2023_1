@@ -1,18 +1,22 @@
 import React, {useContext} from 'react';
-import {
-  FlatList,
-  Text,
-  Alert,
-  TouchableHighlight,
-  StyleSheet,
-} from 'react-native';
+import {FlatList, Alert} from 'react-native';
 import {AuthUserContext} from '../../context/AuthUserProvider';
 import {CommonActions} from '@react-navigation/native';
-import Icon from 'react-native-vector-icons/Ionicons';
-import {COLORS} from '../../assets/colors';
+import Item from './Item';
 
 const Menu = ({navigation}) => {
   const {sigOut} = useContext(AuthUserContext);
+
+  function processar(opcao) {
+    switch (opcao) {
+      case 'Perfil':
+        navigation.navigate('PerfilUsuario');
+        break;
+      case 'Sair':
+        sair();
+        break;
+    }
+  }
 
   function sair() {
     if (sigOut()) {
@@ -32,34 +36,19 @@ const Menu = ({navigation}) => {
 
   return (
     <FlatList
-      data={[{key: 1, opcao: 'Sair'}]}
+      data={[
+        {key: 1, opcao: 'Perfil', iconName: 'person'},
+        {key: 2, opcao: 'Sair', iconName: 'log-in-sharp'},
+      ]}
       renderItem={({item}) => (
-        <TouchableHighlight style={styles.buttom} onPress={() => sair()}>
-          <>
-            <Icon name="log-in-sharp" color={COLORS.primary} size={30} />
-            <Text style={styles.text}>{item.opcao}</Text>
-          </>
-        </TouchableHighlight>
+        <Item
+          opcao={item.opcao}
+          icon={item.iconName}
+          onPress={() => processar(item.opcao)}
+        />
       )}
       keyExtractor={item => item.key}
     />
   );
 };
 export default Menu;
-
-const styles = StyleSheet.create({
-  buttom: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    width: '100%',
-    height: 'auto',
-    padding: 10,
-    borderBottomWidth: 2,
-  },
-  text: {
-    fontSize: 28,
-    paddingLeft: 10,
-    textAlign: 'left',
-    verticalAlign: 'middle',
-  },
-});

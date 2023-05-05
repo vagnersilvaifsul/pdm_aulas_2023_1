@@ -102,7 +102,7 @@ const Empresa = ({route, navigation}) => {
         onChangeText={t => setTeconologias(t)}
         value={tecnologias}
       />
-      <MyButtom texto="Salvar" onClick={salvar} />
+      <MyButtom text="Salvar" onClick={salvar} />
       {uid ? <DeleteButton texto="Excluir" onClick={excluir} /> : null}
       {loading && <Loading />}
     </Container>
