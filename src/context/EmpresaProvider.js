@@ -37,7 +37,16 @@ export const EmpresaProvider = ({children}) => {
           uid: k[1],
         });
       });
-      data.sort((a, b) => b.nome.localeCompare(a.nome));
+      data.sort((a, b) => {
+        if (a.nome.toUpperCase() < b.nome.toUpperCase()) {
+          return -1;
+        }
+        if (a.nome.toUpperCase() > b.nome.toUpperCase()) {
+          return 1;
+        }
+        // nomes iguais
+        return 0;
+      });
       setEmpresas(data);
     } catch (response) {
       console.error('Erro em getCompanies via API:');
