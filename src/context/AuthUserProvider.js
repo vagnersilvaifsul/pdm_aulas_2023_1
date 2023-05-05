@@ -58,10 +58,7 @@ export const AuthUserProvider = ({children}) => {
         return 'Você deve validar seu email para continuar.';
       }
       await storeUserSession(email, pass);
-      let userLocal = await getUser();
-      if (userLocal) {
-        userLocal.pass = pass;
-        setUser(userLocal);
+      if (await getUser(pass)) {
         return 'ok';
       } else {
         return 'Problemas ao buscar o seu perfil. Contate o administrador.';
@@ -80,11 +77,13 @@ export const AuthUserProvider = ({children}) => {
     }
   }
 
-  async function sigOut() {
+  async function signOut() {
     try {
       setUser(null);
       await EncryptedStorage.removeItem('user_session');
-      await auth().signOut();
+      if (auth().currentUser) {
+        await auth().signOut();
+      }
       return true;
     } catch (e) {
       return false;
@@ -100,11 +99,14 @@ export const AuthUserProvider = ({children}) => {
         .get();
       if (doc.exists) {
         //console.log('Document data:', doc.data());
+        doc.data().uid = auth().currentUser.uid;
+        doc.data().pass = pass;
+        setUser(doc.data());
         return doc.data();
       }
       return null;
     } catch (e) {
-      console.error('AuthUserProvider: getUser: ' + e);
+      return null;
     }
   }
 
@@ -128,7 +130,15 @@ export const AuthUserProvider = ({children}) => {
 
   return (
     <AuthUserContext.Provider
-      value={{user, signUp, signIn, retrieveUserSession, forgotPass, sigOut}}>
+      value={{
+        user,
+        signUp,
+        signIn,
+        retrieveUserSession,
+        forgotPass,
+        signOut,
+        getUser,
+      }}>
       {children}
     </AuthUserContext.Provider>
   );

@@ -5,7 +5,7 @@ import {CommonActions} from '@react-navigation/native';
 import Item from './Item';
 
 const Menu = ({navigation}) => {
-  const {sigOut} = useContext(AuthUserContext);
+  const {signOut} = useContext(AuthUserContext);
 
   function processar(opcao) {
     switch (opcao) {
@@ -19,7 +19,7 @@ const Menu = ({navigation}) => {
   }
 
   function sair() {
-    if (sigOut()) {
+    if (signOut()) {
       navigation.dispatch(
         CommonActions.reset({
           index: 0,
