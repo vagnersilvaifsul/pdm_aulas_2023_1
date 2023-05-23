@@ -40,7 +40,7 @@ const Estudantes = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <SearchBar setSearch={filterByName} />
+      <SearchBar text="digite o nome do aluno" setSearch={filterByName} />
       {/* {estudantesTemp.length > 0
         ? estudantesTemp.map((v, k) => (
             <Item item={v} onPress={() => routeStudent(v)} key={k} />

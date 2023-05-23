@@ -58,7 +58,7 @@ const Empresas = ({navigation}) => {
 
   return (
     <Container>
-      <SearchBar setSearch={filterByName} />
+      <SearchBar text="digite o nome da empresa" setSearch={filterByName} />
       <FlatList
         data={empresasTemp.length > 0 ? empresasTemp : empresas}
         renderItem={renderItem}

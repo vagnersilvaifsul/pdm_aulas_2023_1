@@ -1,11 +1,11 @@
 import React from 'react';
 import {View, TextInput} from 'react-native';
 
-export default function ({setSearch}) {
+export default function ({text, setSearch}) {
   return (
     <View>
       <TextInput
-        placeholder="digite o nome do aluno"
+        placeholder={text}
         keyboardType="default"
         returnKeyType="next"
         onChangeText={t => setSearch(t)}
