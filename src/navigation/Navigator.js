@@ -12,6 +12,7 @@ import Empresas from '../screens/Empresas';
 import Empresa from '../screens/Empresa';
 import Cursos from '../screens/Cursos';
 import ForgotPassWord from '../screens/ForgotPassword';
+import EmpresasMap from '../screens/EmpresasMap';
 import Menu from '../screens/Menu';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {COLORS} from '../assets/colors';
@@ -106,6 +107,13 @@ const Navigator = () => (
       <Stack.Screen
         component={PerfilUsuario}
         name="PerfilUsuario"
+        options={{
+          presentation: 'modal',
+        }}
+      />
+      <Stack.Screen
+        component={EmpresasMap}
+        name="EmpresasMap"
         options={{
           presentation: 'modal',
         }}

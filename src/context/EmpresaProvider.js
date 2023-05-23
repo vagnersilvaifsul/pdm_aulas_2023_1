@@ -29,11 +29,13 @@ export const EmpresaProvider = ({children}) => {
           'projects/pdm-aulas-797c8/databases/(default)/documents/empresas/',
         );
         //console.log(k[1]);
-        //console.log(d.fields.nome.stringValue);
-        //console.log(d.fields.tecnologias.stringValue);
+        // console.log(d.fields.latitude.stringValue);
+        // console.log(d.fields.longitude.stringValue);
         data.push({
           nome: d.fields.nome.stringValue,
           tecnologias: d.fields.tecnologias.stringValue,
+          latitude: d.fields.latitude.stringValue,
+          longitude: d.fields.longitude.stringValue,
           uid: k[1],
         });
       });
@@ -118,18 +120,19 @@ export const EmpresaProvider = ({children}) => {
   // };
 
   const updateCompany = async val => {
-    //console.log(val);
     try {
       await api.patch('/empresas/' + val.uid, {
         fields: {
           nome: {stringValue: val.nome},
           tecnologias: {stringValue: val.tecnologias},
+          latitude: {stringValue: val.latitude},
+          longitude: {stringValue: val.longitude},
         },
       });
       getCompanies();
       return true;
     } catch (response) {
-      console.error('Erro em updateCompany via API: ' + response);
+      // console.error('Erro em updateCompany via API: ' + response);
       return false;
     }
   };

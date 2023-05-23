@@ -10,6 +10,8 @@ const Empresa = ({route, navigation}) => {
   const [nome, setNome] = useState('');
   const [tecnologias, setTeconologias] = useState('');
   const [uid, setUid] = useState('');
+  const [latitude, setLatitude] = useState('0');
+  const [longitude, setLongitude] = useState('0');
   const [loading, setLoading] = useState(false);
   const {saveCompany, updateCompany, deleteCompany} =
     useContext(EmpresaContext);
@@ -20,6 +22,8 @@ const Empresa = ({route, navigation}) => {
       setNome(route.params.company.nome);
       setTeconologias(route.params.company.tecnologias);
       setUid(route.params.company.uid);
+      setLatitude(route.params.company.latitude);
+      setLongitude(route.params.company.longitude);
     }
   }, [route]);
 
@@ -29,6 +33,8 @@ const Empresa = ({route, navigation}) => {
       company.uid = uid;
       company.nome = nome;
       company.tecnologias = tecnologias;
+      company.latitude = latitude;
+      company.longitude = longitude;
       setLoading(true);
       if (uid) {
         if (await updateCompany(company)) {
@@ -86,6 +92,11 @@ const Empresa = ({route, navigation}) => {
     );
   };
 
+  function onGoBack(lat, long) {
+    setLatitude(lat.toString());
+    setLongitude(long.toString());
+  }
+
   return (
     <Container>
       <TextInput
@@ -102,8 +113,28 @@ const Empresa = ({route, navigation}) => {
         onChangeText={t => setTeconologias(t)}
         value={tecnologias}
       />
+      <TextInput
+        placeholder="Latitude"
+        editable={false}
+        keyboardType="default"
+        returnKeyType="go"
+        onChangeText={t => setTeconologias(t)}
+        value={latitude}
+      />
+      <TextInput
+        placeholder="Longitude"
+        editable={false}
+        keyboardType="default"
+        returnKeyType="go"
+        onChangeText={t => setTeconologias(t)}
+        value={longitude}
+      />
       <MyButtom text="Salvar" onClick={salvar} />
       {uid ? <DeleteButton texto="Excluir" onClick={excluir} /> : null}
+      <DeleteButton
+        texto="Obter Coordenadas no Mapa"
+        onClick={() => navigation.navigate('EmpresasMap', {onGoBack})}
+      />
       {loading && <Loading />}
     </Container>
   );

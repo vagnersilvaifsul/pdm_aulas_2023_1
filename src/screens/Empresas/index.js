@@ -5,6 +5,7 @@ import Item from './Item';
 import AddFloatButton from '../../components/AddFloatButton';
 import {EmpresaContext} from '../../context/EmpresaProvider';
 import SearchBar from '../../components/SearchBar';
+import MyButtom from '../../components/MyButtom';
 
 const Empresas = ({navigation}) => {
   const {empresas} = useContext(EmpresaContext);
@@ -59,6 +60,10 @@ const Empresas = ({navigation}) => {
   return (
     <Container>
       <SearchBar text="digite o nome da empresa" setSearch={filterByName} />
+      <MyButtom
+        text="Visualizar no Mapa"
+        onClick={() => navigation.navigate('EmpresasMap')}
+      />
       <FlatList
         data={empresasTemp.length > 0 ? empresasTemp : empresas}
         renderItem={renderItem}
