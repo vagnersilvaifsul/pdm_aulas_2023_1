@@ -5,7 +5,7 @@ import {COLORS} from '../../assets/colors';
 import {EmpresaContext} from '../../context/EmpresaProvider';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const EmpresasMap = ({route}) => {
+const EmpresasMap = ({route, navigation}) => {
   const [mapType, setMapType] = useState('standard');
   const {empresas} = useContext(EmpresaContext);
 
@@ -52,11 +52,26 @@ const EmpresasMap = ({route}) => {
             e.nativeEvent.coordinate.longitude,
           );
           Alert.alert(
-            'Coordenadas',
-            'latitude= ' +
+            'Show!',
+            'Latitude= ' +
               e.nativeEvent.coordinate.latitude +
-              ' longitude= ' +
-              e.nativeEvent.coordinate.longitude,
+              '\nLongitude= ' +
+              e.nativeEvent.coordinate.longitude +
+              '\nConfirmar esse local?',
+            [
+              {
+                text: 'Não',
+                onPress: () => {},
+                style: 'cancel',
+              },
+              {
+                text: 'Sim',
+                onPress: () => {
+                  navigation.goBack();
+                },
+                style: 'cancel',
+              },
+            ],
           );
         }}
         initialRegion={{

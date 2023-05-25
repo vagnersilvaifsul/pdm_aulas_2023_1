@@ -90,6 +90,8 @@ export const EmpresaProvider = ({children}) => {
         fields: {
           nome: {stringValue: val.nome},
           tecnologias: {stringValue: val.tecnologias},
+          latitude: {stringValue: val.latitude},
+          longitude: {stringValue: val.longitude},
         },
       });
       getCompanies();

@@ -28,7 +28,7 @@ const Empresa = ({route, navigation}) => {
   }, [route]);
 
   const salvar = async () => {
-    if (nome && tecnologias) {
+    if (nome && tecnologias && latitude && longitude) {
       let company = {};
       company.uid = uid;
       company.nome = nome;
