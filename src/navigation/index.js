@@ -5,19 +5,22 @@ import Navigator from './Navigator';
 import {ApiProvider} from '../context/ApiProvider';
 import {EmpresaProvider} from '../context/EmpresaProvider';
 import {UserProvider} from '../context/UserProvider';
+import {NotificationsProvider} from '../context/Notifications';
 
 export default function Providers() {
   return (
     <AuthUserProvider>
-      <ApiProvider>
-        <UserProvider>
-          <EstudanteProvider>
-            <EmpresaProvider>
-              <Navigator />
-            </EmpresaProvider>
-          </EstudanteProvider>
-        </UserProvider>
-      </ApiProvider>
+      <NotificationsProvider>
+        <ApiProvider>
+          <UserProvider>
+            <EstudanteProvider>
+              <EmpresaProvider>
+                <Navigator />
+              </EmpresaProvider>
+            </EstudanteProvider>
+          </UserProvider>
+        </ApiProvider>
+      </NotificationsProvider>
     </AuthUserProvider>
   );
 }

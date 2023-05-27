@@ -8,7 +8,7 @@ export const NotificationsProvider = ({children}) => {
   const [notificationContent, setNotificationContent] = useState(null);
 
   useEffect(() => {
-    //quando o app está fechado
+    //quando o app está fechado //TODO: Testar
     messaging()
       .getInitialNotification()
       .then(remoteMessage => {
@@ -20,11 +20,8 @@ export const NotificationsProvider = ({children}) => {
         }
       });
 
-    //quando o app está parado
+    //quando o app está parado (testado, ok)
     messaging().onNotificationOpenedApp(remoteMessage => {
-      console.log('====================================');
-      console.log(remoteMessage);
-      console.log('====================================');
       if (remoteMessage.notification.title && remoteMessage.notification.body) {
         let content = {
           title: remoteMessage.notification.title,
@@ -35,7 +32,7 @@ export const NotificationsProvider = ({children}) => {
       //navigate(remoteMessage.data.route);
     });
 
-    //quando o app está aberto
+    //quando o app está aberto //TODO: testar
     messaging().onMessage(async remoteMessage => {
       console.log(
         'Notification recebida com o app aberto (objeto na RAM, tela pro user): ',
