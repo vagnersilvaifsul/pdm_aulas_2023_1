@@ -8,7 +8,13 @@ export const NotificationsProvider = ({children}) => {
   const [notificationContent, setNotificationContent] = useState(null);
 
   useEffect(() => {
-    //quando o app está fechado //TODO: Testar
+    /*
+      Inscreve os listeners dos 3 tipos de processamento de notifications.
+      Obs.: Para que estes listeners funcionem, no arquivo index.js (na raiz do app) você
+      deve registrar o messaging().setBackgroundMessageHandler(async remoteMessage => {}).
+    */
+
+    //quando o app está fechado (testado, ok)
     messaging()
       .getInitialNotification()
       .then(remoteMessage => {
@@ -32,12 +38,9 @@ export const NotificationsProvider = ({children}) => {
       //navigate(remoteMessage.data.route);
     });
 
-    //quando o app está aberto //TODO: testar
+    //quando o app está aberto (testado, ok)
     messaging().onMessage(async remoteMessage => {
-      console.log(
-        'Notification recebida com o app aberto (objeto na RAM, tela pro user): ',
-        remoteMessage,
-      );
+      console.log('Notification recebida com o app aberto: ', remoteMessage);
       if (remoteMessage.notification.title && remoteMessage.notification.body) {
         let content = {
           title: remoteMessage.notification.title,
