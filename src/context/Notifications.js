@@ -80,7 +80,6 @@ export const NotificationsProvider = ({children}) => {
           messaging().unsubscribeFromTopic('admin');
           break;
       }
-      messaging().subscribeToTopic(user.perfil);
     }
   }, [user]);
 
