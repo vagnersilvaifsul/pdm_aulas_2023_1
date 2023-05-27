@@ -1,11 +1,13 @@
-import React, {createContext, useEffect, useState} from 'react';
+import React, {createContext, useContext, useEffect, useState} from 'react';
 import {Alert} from 'react-native';
 import messaging from '@react-native-firebase/messaging';
+import {AuthUserContext} from './AuthUserProvider';
 
 export const NotificationsContext = createContext({});
 
 export const NotificationsProvider = ({children}) => {
   const [notification, setNotification] = useState(null);
+  const {user} = useContext(AuthUserContext);
 
   useEffect(() => {
     /*
@@ -65,6 +67,22 @@ export const NotificationsProvider = ({children}) => {
       }
     });
   }, []);
+
+  useEffect(() => {
+    if (user) {
+      switch (user.perfil) {
+        case 'admin':
+          messaging().subscribeToTopic(user.perfil);
+          messaging().unsubscribeFromTopic('user');
+          break;
+        case 'user':
+          messaging().subscribeToTopic(user.perfil);
+          messaging().unsubscribeFromTopic('admin');
+          break;
+      }
+      messaging().subscribeToTopic(user.perfil);
+    }
+  }, [user]);
 
   return (
     <NotificationsContext.Provider value={{}}>
