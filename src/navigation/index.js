@@ -5,7 +5,7 @@ import Navigator from './Navigator';
 import {ApiProvider} from '../context/ApiProvider';
 import {EmpresaProvider} from '../context/EmpresaProvider';
 import {UserProvider} from '../context/UserProvider';
-import {NotificationsProvider} from '../context/Notifications';
+import {NotificationsProvider} from '../context/NotificationsProvider';
 
 export default function Providers() {
   return (
