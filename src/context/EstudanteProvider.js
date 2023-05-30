@@ -13,7 +13,7 @@ export const EstudanteProvider = ({children}) => {
       .onSnapshot(snapShot => {
         //console.log(snapShot);
         //console.log(snapShot._docs);
-        if(snapShot){
+        if (snapShot) {
           let data = [];
           snapShot.forEach(doc => {
             data.push({
@@ -23,7 +23,7 @@ export const EstudanteProvider = ({children}) => {
             });
           });
           setEstudantes(data);
-        } 
+        }
       });
 
     return () => {

@@ -69,7 +69,7 @@ export const NotificationsProvider = ({children}) => {
   }, []);
 
   useEffect(() => {
-    /* 
+    /*
       Inscreve e desinscreve em um tópico.
     */
     if (user) {
