@@ -13,15 +13,17 @@ export const EstudanteProvider = ({children}) => {
       .onSnapshot(snapShot => {
         //console.log(snapShot);
         //console.log(snapShot._docs);
-        let data = [];
-        snapShot.forEach(doc => {
-          data.push({
-            uid: doc.id,
-            nome: doc.data().nome,
-            curso: doc.data().curso,
+        if(snapShot){
+          let data = [];
+          snapShot.forEach(doc => {
+            data.push({
+              uid: doc.id,
+              nome: doc.data().nome,
+              curso: doc.data().curso,
+            });
           });
-        });
-        setEstudantes(data);
+          setEstudantes(data);
+        } 
       });
 
     return () => {
