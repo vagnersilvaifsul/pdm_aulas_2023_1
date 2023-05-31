@@ -8,14 +8,17 @@ export const ApiProvider = ({children}) => {
   const [api, setApi] = useState(null);
 
   const getApi = () => {
+    const localhost =
+      'http://192.168.68.107:8080/v1/projects/pdm-aulas-797c8/databases/(default)/documents/';
+    const remotehost =
+      'https://firestore.googleapis.com/v1/projects/pdm-aulas-797c8/databases/(default)/documents/';
     if (auth().currentUser) {
       auth()
         .currentUser.getIdToken(true)
         .then(idToken => {
           if (idToken) {
             const apiLocal = create({
-              baseURL:
-                'https://firestore.googleapis.com/v1/projects/pdm-aulas-797c8/databases/(default)/documents/',
+              baseURL: localhost,
               headers: {Authorization: 'Bearer ' + idToken},
             });
 
