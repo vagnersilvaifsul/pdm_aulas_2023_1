@@ -3,6 +3,7 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {StatusBar} from 'react-native';
 import SignIn from '../screens/SignIn';
 import Estudantes from '../screens/Estudantes';
 import Preload from '../screens/Preload';
@@ -83,6 +84,7 @@ const AppStack = () => (
 
 const Navigator = () => (
   <NavigationContainer>
+    <StatusBar backgroundColor={COLORS.primaryDark} />
     <Stack.Navigator
       initialRouteName="AuthStack"
       screenOptions={{
