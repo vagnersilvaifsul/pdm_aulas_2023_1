@@ -55,10 +55,12 @@ const Estudante = ({route, navigation}) => {
         uid,
         nome,
         curso,
-        urlFoto: urlStorage,
+        urlFoto: urlStorage === '' ? urlFoto : urlStorage,
       })
     ) {
       ToastAndroid.show('Show! Você salvou com sucesso.', ToastAndroid.LONG);
+      setUriImageDevice('');
+      setCurso('');
       navigation.goBack();
     } else {
       ToastAndroid.show('Ops!Deu problema ao salvar.', ToastAndroid.LONG);
