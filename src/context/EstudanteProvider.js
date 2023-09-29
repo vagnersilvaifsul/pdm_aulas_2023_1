@@ -1,5 +1,6 @@
 import React, {createContext, useEffect, useState} from 'react';
 import firestore from '@react-native-firebase/firestore';
+import storage from '@react-native-firebase/storage';
 
 export const EstudanteContext = createContext({});
 
@@ -20,6 +21,7 @@ export const EstudanteProvider = ({children}) => {
               uid: doc.id,
               nome: doc.data().nome,
               curso: doc.data().curso,
+              urlFoto: doc.data().urlFoto,
             });
           });
           setEstudantes(data);
@@ -37,6 +39,7 @@ export const EstudanteProvider = ({children}) => {
         {
           nome: estudante.nome,
           curso: estudante.curso,
+          urlFoto: estudante.urlFoto,
         },
         {merge: true},
       );
@@ -57,8 +60,31 @@ export const EstudanteProvider = ({children}) => {
     }
   };
 
+  //path: o caminho onde deve ser salva a imagem no Storage
+  //image: qual imagem deve ser salva nesse path (qual imagem faz o upload)
+  async function sendImageToStorage(path, imagem) {
+    let url = ''; //local onde a imagem será salva no Storage
+    const task = storage().ref(path).putFile(imagem?.uri);
+    task.on('state_changed', taskSnapshot => {
+      //Para acompanhar o upload
+      // console.log(
+      //   'Transf:\n' +
+      //     `${taskSnapshot.bytesTransferred} transferred out of ${taskSnapshot.totalBytes}`,
+      // );
+    });
+    await task.then(async () => {
+      //se a task finalizar com sucesso, busca
+      url = await storage().ref(path).getDownloadURL();
+    });
+    task.catch(e => {
+      console.error('EstudanteProvider, sendImageToStorage: ' + e);
+    });
+    return url;
+  }
+
   return (
-    <EstudanteContext.Provider value={{estudantes, save, del}}>
+    <EstudanteContext.Provider
+      value={{estudantes, save, del, sendImageToStorage}}>
       {children}
     </EstudanteContext.Provider>
   );
