@@ -45,7 +45,7 @@ const Estudante = ({route, navigation}) => {
         80,
       );
       //e prepara o path onde ela deve ser salva no storage
-      const pathToStorage = `images/${uid}/${nome}/foto.jpeg`;
+      const pathToStorage = `images/${curso}/${nome}/foto.png`;
       //para, agora sim, enviar para o Storage
       urlStorage = await sendImageToStorage(pathToStorage, imageRedimencionada);
     }
@@ -115,7 +115,6 @@ const Estudante = ({route, navigation}) => {
         ToastAndroid.show('Ok, você cancelou.', ToastAndroid.LONG);
       } else {
         const path = response.assets[0].uri;
-        console.log(path);
         setUriImageDevice(path); //armazena a uri para a imagem no device
       }
     });
@@ -167,7 +166,7 @@ const Estudante = ({route, navigation}) => {
               : uriImageDevice !== ''
               ? {uri: uriImageDevice}
               : {
-                  uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAXusGK_JYWv_WvhPl9PAVKb7g71ny6lRMiA&usqp=CAUss',
+                  uri: 'https://firebasestorage.googleapis.com/v0/b/pdm-aulas-797c8.appspot.com/o/images%2Fperson.png?alt=media&token=2be8523f-4c17-4a09-afbb-301a95a5ddfb&_gl=1*18jiiyk*_ga*MjA2NDY5NjU3NS4xNjg4MTI5NjYw*_ga_CW55HF8NVT*MTY5NjAyMzQxOS4zMS4xLjE2OTYwMjU4NzQuMzMuMC4w',
                 }
           }
           containerStyle={styles.image}
