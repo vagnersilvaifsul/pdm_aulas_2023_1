@@ -50,9 +50,10 @@ export const EstudanteProvider = ({children}) => {
     }
   };
 
-  const del = async uid => {
+  const del = async (uid, path) => {
     try {
       await firestore().collection('estudantes').doc(uid).delete();
+      await storage().ref(path).delete();
       return true;
     } catch (e) {
       console.error('EstudanteProvider, del: ', e);

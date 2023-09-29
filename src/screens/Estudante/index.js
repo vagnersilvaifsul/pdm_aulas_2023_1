@@ -82,7 +82,8 @@ const Estudante = ({route, navigation}) => {
           text: 'Sim',
           onPress: async () => {
             setLoading(true);
-            if (await del(uid)) {
+            const pathStorageToDelete = `images/${curso}/${nome}/foto.png`;
+            if (await del(uid, pathStorageToDelete)) {
               ToastAndroid.show(
                 'Ordem dada é ordem cumprida',
                 ToastAndroid.LONG,
