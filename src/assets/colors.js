@@ -5,7 +5,7 @@ export const COLORS = {
   accent: '#478b5d',
   accentSecundary: '#8b5d47',
   grey: '#ccc',
-  white: '#fff',
+  white: 'rgb(242,242,242)',
   black: '#000',
   transparent: 'transparent',
 };

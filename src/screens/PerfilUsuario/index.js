@@ -7,8 +7,9 @@ import Loading from '../../components/Loading';
 import {AuthUserContext} from '../../context/AuthUserProvider';
 import {UserContext} from '../../context/UserProvider';
 import {CommonActions} from '@react-navigation/native';
-import {Image} from '@rneui/base';
+import {Image, ButtonGroup} from '@rneui/base';
 import {COLORS} from '../../assets/colors';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 
 const PerfilUsuario = ({navigation}) => {
   const {user} = useContext(AuthUserContext);
@@ -18,6 +19,7 @@ const PerfilUsuario = ({navigation}) => {
   const [newPass, setNewPass] = useState('');
   const [newPassConfirm, setNePassConfirm] = useState('');
   const [loading, setLoading] = useState(false);
+  const [urlDevice, setUrlDevice] = useState('');
   const {save, del, updatePassword} = useContext(UserContext);
 
   useEffect(() => {
@@ -49,7 +51,7 @@ const PerfilUsuario = ({navigation}) => {
               let localUser = {};
               localUser.uid = user.uid;
               localUser.nome = nome;
-              if (await save(localUser)) {
+              if (await save(localUser, urlDevice)) {
                 ToastAndroid.show(
                   'Show! Você salvou os dados com sucesso.',
                   ToastAndroid.LONG,
@@ -155,13 +157,74 @@ const PerfilUsuario = ({navigation}) => {
     }
   }
 
+  const buscaNaGaleria = () => {
+    const options = {
+      storageOptions: {
+        title: 'Selecionar  uma imagem',
+        skipBackup: true,
+        path: 'images',
+        mediaType: 'photo',
+        width: 150,
+        height: 200,
+      },
+    };
+
+    launchImageLibrary(options, response => {
+      if (response.errorCode) {
+        ToastAndroid.show('Ops! Erro ao buscar a imagem.', ToastAndroid.LONG);
+      } else if (response.didCancel) {
+        ToastAndroid.show('Ok, você cancelou.', ToastAndroid.LONG);
+      } else {
+        const path = response.assets[0].uri;
+        setUrlDevice(path); //armazena a uri para a imagem no device
+      }
+    });
+  };
+
+  function tiraFoto() {
+    const options = {
+      storageOptions: {
+        title: 'Tirar uma foto',
+        skipBackup: true,
+        path: 'images',
+        mediaType: 'photo',
+        width: 150,
+        height: 200,
+      },
+    };
+
+    launchCamera(options, response => {
+      if (response.errorCode) {
+        ToastAndroid.show('Ops! Erro ao tirar a foto.', ToastAndroid.LONG);
+      } else if (response.didCancel) {
+        ToastAndroid.show('Ok, você cancelou.', ToastAndroid.LONG);
+      } else {
+        const path = response?.assets[0]?.uri;
+        //console.log(path);
+        setUrlDevice(path); //armazena a uri para a imagem no device
+      }
+    });
+  }
+
+  function buscarImagemNoDevice(v) {
+    switch (v) {
+      case 0:
+        buscaNaGaleria();
+        break;
+      case 1:
+        tiraFoto();
+        break;
+    }
+  }
+
   return (
     <Scroll>
       <Body>
-        <Text>Perfil do Usuário</Text>
         <Image
           source={
-            user.urlFoto !== ''
+            urlDevice !== ''
+              ? {uri: urlDevice}
+              : user.urlFoto !== ''
               ? {uri: user.urlFoto}
               : {
                   uri: 'https://firebasestorage.googleapis.com/v0/b/pdm-aulas-797c8.appspot.com/o/images%2Fperson.png?alt=media&token=2be8523f-4c17-4a09-afbb-301a95a5ddfb&_gl=1*18jiiyk*_ga*MjA2NDY5NjU3NS4xNjg4MTI5NjYw*_ga_CW55HF8NVT*MTY5NjAyMzQxOS4zMS4xLjE2OTYwMjU4NzQuMzMuMC4w',
@@ -169,6 +232,12 @@ const PerfilUsuario = ({navigation}) => {
           }
           containerStyle={styles.image}
           PlaceholderContent={<Loading />}
+        />
+        <ButtonGroup
+          buttons={['Buscar na Galeria', 'Tira Foto']}
+          onPress={v => buscarImagemNoDevice(v)}
+          containerStyle={styles.buttonGroup}
+          textStyle={{color: COLORS.primaryDark}}
         />
         <TextInput
           value={nome}
@@ -222,13 +291,15 @@ export default PerfilUsuario;
 //estilo aplicado em componentes RNE
 const styles = StyleSheet.create({
   image: {
-    width: 75,
+    width: 100,
     height: 100,
     justifyContent: 'center',
     alignItems: 'center',
+    borderRadius: 100 / 2,
   },
   buttonGroup: {
     marginBottom: 10,
-    borderColor: COLORS.primaryDark,
+    borderColor: COLORS.grey,
+    backgroundColor: COLORS.white,
   },
 });
