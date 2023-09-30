@@ -7,4 +7,5 @@ export const COLORS = {
   grey: '#ccc',
   white: '#fff',
   black: '#000',
+  transparent: 'transparent',
 };
