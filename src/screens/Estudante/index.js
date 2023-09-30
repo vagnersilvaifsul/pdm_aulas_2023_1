@@ -150,10 +150,10 @@ const Estudante = ({route, navigation}) => {
       <Container>
         <Image
           source={
-            urlFoto !== ''
-              ? {uri: urlFoto}
-              : urlDevice !== ''
+            urlDevice !== ''
               ? {uri: urlDevice}
+              : urlFoto !== ''
+              ? {uri: urlFoto}
               : {
                   uri: 'https://firebasestorage.googleapis.com/v0/b/pdm-aulas-797c8.appspot.com/o/images%2Fperson.png?alt=media&token=2be8523f-4c17-4a09-afbb-301a95a5ddfb&_gl=1*18jiiyk*_ga*MjA2NDY5NjU3NS4xNjg4MTI5NjYw*_ga_CW55HF8NVT*MTY5NjAyMzQxOS4zMS4xLjE2OTYwMjU4NzQuMzMuMC4w',
                 }

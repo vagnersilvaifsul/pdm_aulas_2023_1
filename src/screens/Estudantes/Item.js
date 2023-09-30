@@ -2,6 +2,7 @@ import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {Card, Text, Button, Image} from '@rneui/base';
 import {COLORS} from '../../assets/colors';
+import Loading from '../../components/Loading';
 
 const Item = ({item, onPress}) => {
   return (
@@ -9,7 +10,11 @@ const Item = ({item, onPress}) => {
       <Card.Title style={styles.curso}>{item.curso}</Card.Title>
       <Card.Divider />
       <View style={styles.estudante}>
-        <Image style={styles.urlFoto} source={{uri: item.urlFoto}} />
+        <Image
+          style={styles.urlFoto}
+          source={{uri: item.urlFoto}}
+          PlaceholderContent={<Loading />}
+        />
         <Text style={styles.nome}>{item.nome}</Text>
       </View>
       <Button
