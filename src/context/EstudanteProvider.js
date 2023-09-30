@@ -1,6 +1,7 @@
 import React, {createContext, useEffect, useState} from 'react';
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
+import ImageResizer from '@bam.tech/react-native-image-resizer';
 
 export const EstudanteContext = createContext({});
 
@@ -33,8 +34,14 @@ export const EstudanteProvider = ({children}) => {
     };
   }, []);
 
-  const save = async estudante => {
+  const save = async (estudante, urlDevice) => {
     try {
+      if (urlDevice !== '') {
+        estudante.urlFoto = await sendImageToStorage(urlDevice, estudante);
+        if (!estudante.urlFoto) {
+          return false; //não deixa salvar ou atualizar se não realizar todos os passpos para enviar a imagem para o storage
+        }
+      }
       await firestore().collection('estudantes').doc(estudante.uid).set(
         {
           nome: estudante.nome,
@@ -50,6 +57,43 @@ export const EstudanteProvider = ({children}) => {
     }
   };
 
+  //urlDevice: qual imagem deve ser enviada via upload
+  async function sendImageToStorage(urlDevice, estudante) {
+    //1. Redimensiona e compacta a imagem
+    let imageRedimencionada = await ImageResizer.createResizedImage(
+      urlDevice,
+      150,
+      200,
+      'PNG',
+      80,
+    );
+    //2. e prepara o path onde ela deve ser salva no storage
+    const pathToStorage = `images/${estudante.curso}/${estudante.uid}/foto.png`;
+
+    //3. Envia para o storage
+    let url = ''; //local onde a imagem será salva no Storage
+    const task = storage().ref(pathToStorage).putFile(imageRedimencionada?.uri);
+    task.on('state_changed', taskSnapshot => {
+      //Para acompanhar o upload, se necessário
+      // console.log(
+      //   'Transf:\n' +
+      //     `${taskSnapshot.bytesTransferred} transferred out of ${taskSnapshot.totalBytes}`,
+      // );
+    });
+
+    //4. Busca a URL gerada pelo Storage
+    await task.then(async () => {
+      //se a task finalizar com sucesso, busca a url
+      url = await storage().ref(pathToStorage).getDownloadURL();
+    });
+    //5. Pode dar zebra, então pega a exceção
+    task.catch(e => {
+      console.error('EstudanteProvider, sendImageToStorage: ' + e);
+      url = null;
+    });
+    return url;
+  }
+
   const del = async (uid, path) => {
     try {
       await firestore().collection('estudantes').doc(uid).delete();
@@ -61,31 +105,8 @@ export const EstudanteProvider = ({children}) => {
     }
   };
 
-  //path: o caminho onde deve ser salva a imagem no Storage
-  //image: qual imagem deve ser salva nesse path (qual imagem faz o upload)
-  async function sendImageToStorage(path, imagem) {
-    let url = ''; //local onde a imagem será salva no Storage
-    const task = storage().ref(path).putFile(imagem?.uri);
-    task.on('state_changed', taskSnapshot => {
-      //Para acompanhar o upload
-      // console.log(
-      //   'Transf:\n' +
-      //     `${taskSnapshot.bytesTransferred} transferred out of ${taskSnapshot.totalBytes}`,
-      // );
-    });
-    await task.then(async () => {
-      //se a task finalizar com sucesso, busca
-      url = await storage().ref(path).getDownloadURL();
-    });
-    task.catch(e => {
-      console.error('EstudanteProvider, sendImageToStorage: ' + e);
-    });
-    return url;
-  }
-
   return (
-    <EstudanteContext.Provider
-      value={{estudantes, save, del, sendImageToStorage}}>
+    <EstudanteContext.Provider value={{estudantes, save, del}}>
       {children}
     </EstudanteContext.Provider>
   );

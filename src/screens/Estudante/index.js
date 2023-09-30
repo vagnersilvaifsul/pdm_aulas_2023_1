@@ -6,7 +6,6 @@ import Loading from '../../components/Loading';
 import DeleteButton from '../../components/DeleteButton';
 import {EstudanteContext} from '../../context/EstudanteProvider';
 import {Image} from '@rneui/base';
-import ImageResizer from '@bam.tech/react-native-image-resizer';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {ButtonGroup} from '@rneui/themed';
 import {COLORS} from '../../assets/colors';
@@ -17,8 +16,8 @@ const Estudante = ({route, navigation}) => {
   const [uid, setUid] = useState('');
   const [loading, setLoading] = useState(false);
   const [urlFoto, setUrlFoto] = useState('');
-  const [uriImageDevice, setUriImageDevice] = useState('');
-  const {save, del, sendImageToStorage} = useContext(EstudanteContext);
+  const [urlDevice, setUrlDevice] = useState('');
+  const {save, del} = useContext(EstudanteContext);
 
   useEffect(() => {
     if (route.params.value) {
@@ -29,37 +28,24 @@ const Estudante = ({route, navigation}) => {
     }
   }, [route]);
 
-  useEffect(() => {}, [uriImageDevice]);
+  useEffect(() => {}, [urlDevice]);
 
   const salvar = async () => {
     setLoading(true);
-    let urlStorage = ''; //url que será salva no Firestore
-    if (uriImageDevice !== '') {
-      //se o usuário selecionou uma imagem, ela deve ser enviada para o Storage
-      //mas antes a redimenciona e a compacta
-      let imageRedimencionada = await ImageResizer.createResizedImage(
-        uriImageDevice,
-        150,
-        200,
-        'PNG',
-        80,
-      );
-      //e prepara o path onde ela deve ser salva no storage
-      const pathToStorage = `images/${curso}/${nome}/foto.png`;
-      //para, agora sim, enviar para o Storage
-      urlStorage = await sendImageToStorage(pathToStorage, imageRedimencionada);
-    }
     if (
       //e salva o registro
-      await save({
-        uid,
-        nome,
-        curso,
-        urlFoto: urlStorage === '' ? urlFoto : urlStorage,
-      })
+      await save(
+        {
+          uid,
+          nome,
+          curso,
+          urlFoto: urlFoto,
+        },
+        urlDevice,
+      )
     ) {
       ToastAndroid.show('Show! Você salvou com sucesso.', ToastAndroid.LONG);
-      setUriImageDevice('');
+      setUrlDevice('');
       setCurso('');
       navigation.goBack();
     } else {
@@ -118,7 +104,7 @@ const Estudante = ({route, navigation}) => {
         ToastAndroid.show('Ok, você cancelou.', ToastAndroid.LONG);
       } else {
         const path = response.assets[0].uri;
-        setUriImageDevice(path); //armazena a uri para a imagem no device
+        setUrlDevice(path); //armazena a uri para a imagem no device
       }
     });
   };
@@ -143,7 +129,7 @@ const Estudante = ({route, navigation}) => {
       } else {
         const path = response?.assets[0]?.uri;
         //console.log(path);
-        setUriImageDevice(path); //armazena a uri para a imagem no device
+        setUrlDevice(path); //armazena a uri para a imagem no device
       }
     });
   }
@@ -166,8 +152,8 @@ const Estudante = ({route, navigation}) => {
           source={
             urlFoto !== ''
               ? {uri: urlFoto}
-              : uriImageDevice !== ''
-              ? {uri: uriImageDevice}
+              : urlDevice !== ''
+              ? {uri: urlDevice}
               : {
                   uri: 'https://firebasestorage.googleapis.com/v0/b/pdm-aulas-797c8.appspot.com/o/images%2Fperson.png?alt=media&token=2be8523f-4c17-4a09-afbb-301a95a5ddfb&_gl=1*18jiiyk*_ga*MjA2NDY5NjU3NS4xNjg4MTI5NjYw*_ga_CW55HF8NVT*MTY5NjAyMzQxOS4zMS4xLjE2OTYwMjU4NzQuMzMuMC4w',
                 }
