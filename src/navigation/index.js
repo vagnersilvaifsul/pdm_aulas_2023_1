@@ -6,21 +6,35 @@ import {ApiProvider} from '../context/ApiProvider';
 import {EmpresaProvider} from '../context/EmpresaProvider';
 import {UserProvider} from '../context/UserProvider';
 import {NotificationsProvider} from '../context/NotificationsProvider';
+import {ThemeProvider, createTheme} from '@rneui/themed';
+import {COLORS} from '../assets/colors';
+
+const theme = createTheme({
+  lightColors: {
+    primary: COLORS.white,
+  },
+  darkColors: {
+    primary: '#000',
+  },
+  mode: 'light',
+});
 
 export default function Providers() {
   return (
-    <AuthUserProvider>
-      <NotificationsProvider>
-        <ApiProvider>
-          <UserProvider>
-            <EstudanteProvider>
-              <EmpresaProvider>
-                <Navigator />
-              </EmpresaProvider>
-            </EstudanteProvider>
-          </UserProvider>
-        </ApiProvider>
-      </NotificationsProvider>
-    </AuthUserProvider>
+    <ThemeProvider theme={theme}>
+      <AuthUserProvider>
+        <NotificationsProvider>
+          <ApiProvider>
+            <UserProvider>
+              <EstudanteProvider>
+                <EmpresaProvider>
+                  <Navigator />
+                </EmpresaProvider>
+              </EstudanteProvider>
+            </UserProvider>
+          </ApiProvider>
+        </NotificationsProvider>
+      </AuthUserProvider>
+    </ThemeProvider>
   );
 }
