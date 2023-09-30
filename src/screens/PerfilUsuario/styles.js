@@ -7,6 +7,8 @@ export const Body = styled.View`
   padding-top: 20px;
 `;
 
+export const Scroll = styled.ScrollView``;
+
 export const TextInput = styled.TextInput`
   width: 95%;
   height: 50px;

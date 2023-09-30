@@ -5,9 +5,9 @@ import {COLORS} from '../../assets/colors';
 
 const Item = ({opcao, icon, onPress}) => {
   return (
-    <TouchableHighlight style={styles.buttom} onPress={onPress}>
+    <TouchableHighlight style={styles.button} onPress={onPress}>
       <>
-        <Icon name={icon} color={COLORS.primary} size={28} />
+        <Icon name={icon} color={COLORS.primary} size={20} />
         <Text style={styles.text}>{opcao}</Text>
       </>
     </TouchableHighlight>
@@ -16,16 +16,18 @@ const Item = ({opcao, icon, onPress}) => {
 export default Item;
 
 const styles = StyleSheet.create({
-  buttom: {
+  button: {
     flexDirection: 'row',
     alignItems: 'center',
-    width: '100%',
+    width: '90%',
     height: 'auto',
     padding: 10,
     borderBottomWidth: 1,
+    marginLeft: 10,
+    marginRight: 10,
   },
   text: {
-    fontSize: 26,
+    fontSize: 16,
     paddingLeft: 10,
     textAlign: 'left',
     verticalAlign: 'middle',

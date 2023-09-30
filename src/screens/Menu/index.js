@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {useContext} from 'react';
 import {FlatList, Alert} from 'react-native';
 import {AuthUserContext} from '../../context/AuthUserProvider';
@@ -48,6 +49,7 @@ const Menu = ({navigation}) => {
         />
       )}
       keyExtractor={item => item.key}
+      style={{marginTop: 10}}
     />
   );
 };

@@ -1,12 +1,14 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {Alert, ToastAndroid} from 'react-native';
-import {Body, TextInput, Text} from './styles';
+import {Alert, ToastAndroid, StyleSheet} from 'react-native';
+import {Body, Scroll, TextInput, Text} from './styles';
 import MyButtom from '../../components/MyButtom';
 import DeleteButton from '../../components/DeleteButton';
 import Loading from '../../components/Loading';
 import {AuthUserContext} from '../../context/AuthUserProvider';
 import {UserContext} from '../../context/UserProvider';
 import {CommonActions} from '@react-navigation/native';
+import {Image} from '@rneui/base';
+import {COLORS} from '../../assets/colors';
 
 const PerfilUsuario = ({navigation}) => {
   const {user} = useContext(AuthUserContext);
@@ -154,52 +156,79 @@ const PerfilUsuario = ({navigation}) => {
   }
 
   return (
-    <Body>
-      <Text>Perfil do Usuário</Text>
-      <TextInput
-        value={nome}
-        placeholder="nome"
-        keyboardType="default"
-        returnKeyType="next"
-        onChangeText={t => setNome(t)}
-      />
-      <TextInput
-        value={email}
-        editable={false}
-        placeholder="email"
-        keyboardType="default"
-        returnKeyType="next"
-      />
-      <TextInput
-        value={oldPass}
-        secureTextEntry={true}
-        placeholder="Senha antiga"
-        keyboardType="default"
-        returnKeyType="next"
-        onChangeText={t => setOldPass(t)}
-      />
-      <TextInput
-        value={newPass}
-        secureTextEntry={true}
-        placeholder="Nova senha (mín. 6 caracteres)"
-        keyboardType="default"
-        returnKeyType="next"
-        onChangeText={t => setNewPass(t)}
-      />
-      <TextInput
-        value={newPassConfirm}
-        secureTextEntry={true}
-        placeholder="Confirme a nova senha"
-        keyboardType="default"
-        returnKeyType="next"
-        onChangeText={t => setNePassConfirm(t)}
-      />
-      <MyButtom text="Salvar" onClick={salvar} />
-      <DeleteButton texto="Excluir Conta" onClick={excluir} />
-      <DeleteButton texto="Alterar Senha" onClick={alterarSenha} />
-      {loading && <Loading />}
-    </Body>
+    <Scroll>
+      <Body>
+        <Text>Perfil do Usuário</Text>
+        <Image
+          source={
+            user.urlFoto !== ''
+              ? {uri: user.urlFoto}
+              : {
+                  uri: 'https://firebasestorage.googleapis.com/v0/b/pdm-aulas-797c8.appspot.com/o/images%2Fperson.png?alt=media&token=2be8523f-4c17-4a09-afbb-301a95a5ddfb&_gl=1*18jiiyk*_ga*MjA2NDY5NjU3NS4xNjg4MTI5NjYw*_ga_CW55HF8NVT*MTY5NjAyMzQxOS4zMS4xLjE2OTYwMjU4NzQuMzMuMC4w',
+                }
+          }
+          containerStyle={styles.image}
+          PlaceholderContent={<Loading />}
+        />
+        <TextInput
+          value={nome}
+          placeholder="nome"
+          keyboardType="default"
+          returnKeyType="next"
+          onChangeText={t => setNome(t)}
+        />
+        <TextInput
+          value={email}
+          editable={false}
+          placeholder="email"
+          keyboardType="default"
+          returnKeyType="next"
+        />
+        <TextInput
+          value={oldPass}
+          secureTextEntry={true}
+          placeholder="Senha antiga"
+          keyboardType="default"
+          returnKeyType="next"
+          onChangeText={t => setOldPass(t)}
+        />
+        <TextInput
+          value={newPass}
+          secureTextEntry={true}
+          placeholder="Nova senha (mín. 6 caracteres)"
+          keyboardType="default"
+          returnKeyType="next"
+          onChangeText={t => setNewPass(t)}
+        />
+        <TextInput
+          value={newPassConfirm}
+          secureTextEntry={true}
+          placeholder="Confirme a nova senha"
+          keyboardType="default"
+          returnKeyType="next"
+          onChangeText={t => setNePassConfirm(t)}
+        />
+        <MyButtom text="Salvar" onClick={salvar} />
+        <DeleteButton texto="Excluir Conta" onClick={excluir} />
+        <DeleteButton texto="Alterar Senha" onClick={alterarSenha} />
+        {loading && <Loading />}
+      </Body>
+    </Scroll>
   );
 };
 
 export default PerfilUsuario;
+
+//estilo aplicado em componentes RNE
+const styles = StyleSheet.create({
+  image: {
+    width: 75,
+    height: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  buttonGroup: {
+    marginBottom: 10,
+    borderColor: COLORS.primaryDark,
+  },
+});
