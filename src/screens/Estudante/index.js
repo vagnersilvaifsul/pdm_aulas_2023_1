@@ -164,8 +164,6 @@ const Estudante = ({route, navigation}) => {
         <ButtonGroup
           buttons={['Buscar na Galeria', 'Tira Foto']}
           onPress={v => buscarImagemNoDevice(v)}
-          containerStyle={styles.buttonGroup}
-          textStyle={{color: COLORS.primary}}
         />
         <TextInput
           placeholder="Nome"
@@ -209,10 +207,5 @@ const styles = StyleSheet.create({
     height: 200,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  buttonGroup: {
-    marginBottom: 10,
-    borderColor: COLORS.primaryDark,
-    backgroundColor: COLORS.white,
   },
 });

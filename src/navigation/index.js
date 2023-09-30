@@ -17,6 +17,16 @@ const theme = createTheme({
     primary: '#000',
   },
   mode: 'light',
+  components: {
+    ButtonGroup: {
+      containerStyle: {
+        marginBottom: 10,
+        borderColor: COLORS.grey,
+        backgroundColor: COLORS.white,
+      },
+      textStyle: {color: COLORS.primary},
+    },
+  },
 });
 
 export default function Providers() {
