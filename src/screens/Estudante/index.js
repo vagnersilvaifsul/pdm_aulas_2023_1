@@ -213,5 +213,6 @@ const styles = StyleSheet.create({
   buttonGroup: {
     marginBottom: 10,
     borderColor: COLORS.primaryDark,
+    backgroundColor: COLORS.white,
   },
 });

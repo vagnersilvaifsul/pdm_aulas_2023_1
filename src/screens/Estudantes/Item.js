@@ -34,10 +34,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'row',
+    backgroundColor: COLORS.white,
   },
   container_style: {
     borderRadius: 10,
     borderColor: COLORS.primaryDark,
+    backgroundColor: COLORS.white,
   },
   curso: {
     color: COLORS.primaryDark,
