@@ -14,6 +14,7 @@ const theme = createTheme({
     primary: COLORS.primary,
     primaryDark: COLORS.primaryDark,
     secondary: COLORS.accent,
+    accentSecundary: COLORS.accentSecundary,
     background: COLORS.white,
   },
   darkColors: {
