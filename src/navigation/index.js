@@ -12,9 +12,12 @@ import {COLORS} from '../assets/colors';
 const theme = createTheme({
   lightColors: {
     primary: COLORS.primary,
+    secondary: COLORS.accent,
+    background: COLORS.white,
   },
   darkColors: {
-    primary: COLORS.primaryDarkColor,
+    primary: COLORS.primary,
+    secondary: COLORS.accent,
   },
   mode: 'light',
   components: {

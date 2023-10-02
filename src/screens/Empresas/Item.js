@@ -5,7 +5,7 @@ import {COLORS} from '../../assets/colors';
 const Button = styled.TouchableHighlight`
   width: 100%;
   height: 100px;
-  background-color: ${COLORS.primaryLight};
+  background-color: ${COLORS.primary};
   padding: 20px;
   margin-top: 10px;
   border-radius: 10px;
