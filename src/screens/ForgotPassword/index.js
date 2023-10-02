@@ -1,12 +1,22 @@
 import React, {useContext, useState} from 'react';
-import {View, StyleSheet, TextInput, Alert} from 'react-native';
-import {COLORS} from '../../assets/colors';
+import {Alert} from 'react-native';
 import MyButtom from '../../components/MyButtom';
 import {AuthUserContext} from '../../context/AuthUserProvider';
+import styled from 'styled-components/native';
+import {Input, Icon} from '@rneui/themed';
+import {useTheme} from '@rneui/themed';
+
+export const Body = styled.SafeAreaView`
+  flex: 1;
+  align-items: center;
+  margin: 10px;
+  margin-top: 40px;
+`;
 
 const ForgotPassWord = ({navigation}) => {
   const [email, setEmail] = useState('');
   const {forgotPass} = useContext(AuthUserContext);
+  const {theme} = useTheme();
 
   const recover = async () => {
     let msgError = '';
@@ -28,34 +38,24 @@ const ForgotPassWord = ({navigation}) => {
   };
 
   return (
-    <View style={styles.container}>
-      <TextInput
-        style={styles.input}
+    <Body>
+      <Input
         placeholder="Email"
         keyboardType="email-address"
         returnKeyType="go"
+        leftIcon={
+          <Icon
+            name="email-check-outline"
+            type="material-community"
+            size={22}
+            color={theme.colors.grey2}
+          />
+        }
         onChangeText={t => setEmail(t)}
         autoFocus={true}
       />
-      <MyButtom text="Recuperar" onClick={recover} />
-    </View>
+      <MyButtom text="Recuperar Senha" onClick={recover} />
+    </Body>
   );
 };
 export default ForgotPassWord;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-  },
-  input: {
-    width: '95%',
-    height: 50,
-    borderBottomColor: COLORS.grey,
-    borderBottomWidth: 2,
-    fontSize: 16,
-    paddingLeft: 2,
-    paddingBottom: 1,
-    marginTop: 40,
-  },
-});
