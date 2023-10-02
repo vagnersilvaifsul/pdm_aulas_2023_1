@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {Alert, ToastAndroid, StyleSheet} from 'react-native';
-import {Body, Scroll, TextInput, Text} from './styles';
+import {Body, Scroll, TextInput} from './styles';
 import MyButtom from '../../components/MyButtom';
 import DeleteButton from '../../components/DeleteButton';
 import Loading from '../../components/Loading';

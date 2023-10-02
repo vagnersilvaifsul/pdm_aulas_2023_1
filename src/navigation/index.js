@@ -14,7 +14,7 @@ const theme = createTheme({
     primary: COLORS.white,
   },
   darkColors: {
-    primary: '#000',
+    primary: COLORS.primaryDarkColor,
   },
   mode: 'light',
   components: {

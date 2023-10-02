@@ -31,5 +31,6 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     textAlign: 'left',
     verticalAlign: 'middle',
+    color: COLORS.primaryDark,
   },
 });
