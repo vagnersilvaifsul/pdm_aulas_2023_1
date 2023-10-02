@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 import {COLORS} from '../../assets/colors';
 
-export const Body = styled.View`
+export const Body = styled.SafeAreaView`
   flex: 1;
   align-items: center;
   padding-top: 20px;

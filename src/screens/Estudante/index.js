@@ -5,10 +5,9 @@ import MyButton from '../../components/MyButtom';
 import Loading from '../../components/Loading';
 import DeleteButton from '../../components/DeleteButton';
 import {EstudanteContext} from '../../context/EstudanteProvider';
-import {Image} from '@rneui/base';
+//import {Image} from '@rneui/base';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
-import {ButtonGroup} from '@rneui/themed';
-import {COLORS} from '../../assets/colors';
+import {Image, ButtonGroup} from '@rneui/themed';
 
 const Estudante = ({route, navigation}) => {
   const [nome, setNome] = useState('');

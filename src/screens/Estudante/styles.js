@@ -4,13 +4,11 @@ import {COLORS} from '../../assets/colors';
 export const Container = styled.SafeAreaView`
   flex: 1;
   align-items: center;
-  padding: 20px;
+  padding: 5px;
+  padding-top: 20px;
 `;
 
-export const Scroll = styled.ScrollView`
-  width: 100%;
-  height: 100%;
-`;
+export const Scroll = styled.ScrollView``;
 
 export const TextInput = styled.TextInput`
   width: 95%;

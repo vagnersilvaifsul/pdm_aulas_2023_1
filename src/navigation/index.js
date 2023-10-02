@@ -11,7 +11,7 @@ import {COLORS} from '../assets/colors';
 
 const theme = createTheme({
   lightColors: {
-    primary: COLORS.white,
+    primary: COLORS.primary,
   },
   darkColors: {
     primary: COLORS.primaryDarkColor,
