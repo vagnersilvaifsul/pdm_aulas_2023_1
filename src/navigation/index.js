@@ -16,6 +16,7 @@ const theme = createTheme({
     secondary: COLORS.accent,
     accentSecundary: COLORS.accentSecundary,
     background: COLORS.white,
+    error: COLORS.errror,
   },
   darkColors: {
     primary: COLORS.primary,
@@ -23,6 +24,21 @@ const theme = createTheme({
   },
   mode: 'light',
   components: {
+    Button: {
+      containerStyle: {
+        width: '85%',
+        height: 50,
+        justifyContent: 'center',
+        margin: 10,
+        backgroundColor: COLORS.accent,
+        borderRadius: 5,
+      },
+      buttonStyle: {
+        backgroundColor: COLORS.accent,
+        borderRadius: 3,
+      },
+      titleStyle: {color: COLORS.white},
+    },
     ButtonGroup: {
       containerStyle: {
         marginBottom: 10,

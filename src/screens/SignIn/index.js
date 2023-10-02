@@ -1,24 +1,19 @@
 import React, {useContext, useState} from 'react';
+import {ScrollView, View, StyleSheet, Alert} from 'react-native';
 import MyButtom from '../../components/MyButtom';
-import {
-  SafeAreaView,
-  ScrollView,
-  View,
-  StyleSheet,
-  Text,
-  Image,
-  TextInput,
-  Alert,
-} from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {Input, Text, Image} from '@rneui/themed';
 import {CommonActions} from '@react-navigation/native';
 import Loading from '../../components/Loading';
 import {AuthUserContext} from '../../context/AuthUserProvider';
 import {useTheme} from '@rneui/themed';
+import {Icon} from '@rneui/themed';
 
 const SignIn = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showPass, setShowPass] = useState(true);
   const {signIn} = useContext(AuthUserContext);
   const {theme} = useTheme();
 
@@ -41,15 +36,6 @@ const SignIn = ({navigation}) => {
       width: 150,
       height: 150,
       margin: 5,
-    },
-    input: {
-      width: '95%',
-      height: 50,
-      borderBottomColor: theme.colors.grey4,
-      borderBottomWidth: 2,
-      fontSize: 16,
-      paddingLeft: 2,
-      paddingBottom: 1,
     },
     textEsqueceuSenha: {
       fontSize: 15,
@@ -74,7 +60,7 @@ const SignIn = ({navigation}) => {
     textOu: {
       marginLeft: 20,
       marginRight: 20,
-      fontSize: 20,
+      fontSize: 18,
       color: theme.colors.grey4,
     },
     divCadastrarSe: {
@@ -88,7 +74,7 @@ const SignIn = ({navigation}) => {
       fontSize: 18,
     },
     textCadastrarSe: {
-      fontSize: 16,
+      fontSize: 15,
       color: theme.colors.accentSecundary,
       marginLeft: 5,
     },
@@ -123,19 +109,44 @@ const SignIn = ({navigation}) => {
             source={require('../../assets/images/logo.png')}
             accessibilityLabel="logo do app"
           />
-          <TextInput
-            style={styles.input}
+          <Input
             placeholder="Email"
             keyboardType="email-address"
             returnKeyType="next"
+            leftIcon={
+              <Icon
+                name="card"
+                type="ionicon"
+                size={22}
+                color={theme.colors.grey2}
+              />
+            }
             onChangeText={t => setEmail(t)}
           />
-          <TextInput
-            style={styles.input}
-            secureTextEntry={true}
+          <Input
+            secureTextEntry={showPass}
             placeholder="Senha"
             keyboardType="default"
             returnKeyType="go"
+            leftIcon={
+              showPass ? (
+                <Icon
+                  name="eye-off"
+                  type="ionicon"
+                  size={22}
+                  color={theme.colors.grey2}
+                  onPress={() => setShowPass(false)}
+                />
+              ) : (
+                <Icon
+                  name="eye"
+                  type="ionicon"
+                  size={22}
+                  color={theme.colors.error}
+                  onPress={() => setShowPass(true)}
+                />
+              )
+            }
             onChangeText={t => setPassword(t)}
           />
           <Text
@@ -152,7 +163,7 @@ const SignIn = ({navigation}) => {
             <View style={styles.divHr} />
           </View>
           <View style={styles.divCadastrarSe}>
-            <Text style={styles.textNormal}>Não tem uma conta?</Text>
+            <Text>Não tem uma conta?</Text>
             <Text
               style={styles.textCadastrarSe}
               onPress={() => navigation.navigate('SignUp')}>

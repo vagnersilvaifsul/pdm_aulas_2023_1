@@ -5,4 +5,5 @@ export const COLORS = {
   accentSecundary: '#8b5d47',
   grey: '#ccc',
   white: 'rgb(242,242,242)',
+  errror: '#D81B60',
 };
