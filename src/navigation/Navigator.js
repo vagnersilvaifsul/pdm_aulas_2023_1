@@ -16,8 +16,8 @@ import ForgotPassWord from '../screens/ForgotPassword';
 import EmpresasMap from '../screens/EmpresasMap';
 import Menu from '../screens/Menu';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {COLORS} from '../assets/colors';
 import PerfilUsuario from '../screens/PerfilUsuario';
+import {useTheme} from '@rneui/themed';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -35,92 +35,108 @@ const AuthStack = () => (
   </Stack.Navigator>
 );
 
-const AppStack = () => (
-  <Tab.Navigator
-    initialRouteName="Estudantes"
-    screenOptions={{
-      headerShown: false,
-    }}>
-    <Tab.Screen
-      component={Estudantes}
-      name="Estudantes"
-      options={{
-        tabBarLabel: 'Alunos',
-        tabBarIcon: () => (
-          <Icon name="people" color={COLORS.primary} size={20} />
-        ),
-      }}
-    />
-    <Tab.Screen
-      component={Empresas}
-      name="Empresas"
-      options={{
-        tabBarLabel: 'Empresas',
-        tabBarIcon: () => (
-          <Icon name="business" color={COLORS.primary} size={20} />
-        ),
-      }}
-    />
-    <Tab.Screen
-      component={Cursos}
-      name="Cursos"
-      options={{
-        tabBarLabel: 'Cursos',
-        tabBarIcon: () => (
-          <Icon name="rocket" color={COLORS.primary} size={20} />
-        ),
-      }}
-    />
-    <Tab.Screen
-      component={Menu}
-      name="Menu"
-      options={{
-        tabBarLabel: 'Menu',
-        tabBarIcon: () => <Icon name="list" color={COLORS.primary} size={20} />,
-      }}
-    />
-  </Tab.Navigator>
-);
-
-const Navigator = () => (
-  <NavigationContainer>
-    <StatusBar backgroundColor={COLORS.primaryDark} />
-    <Stack.Navigator
-      initialRouteName="AuthStack"
+const AppStack = () => {
+  const {theme} = useTheme();
+  return (
+    <Tab.Navigator
+      initialRouteName="Estudantes"
       screenOptions={{
         headerShown: false,
       }}>
-      <Stack.Screen component={AuthStack} name="AuthStack" />
-      <Stack.Screen component={AppStack} name="AppStack" />
-      <Stack.Screen
-        component={Estudante}
-        name="Estudante"
+      <Tab.Screen
+        component={Estudantes}
+        name="Estudantes"
         options={{
-          presentation: 'modal',
+          tabBarLabel: 'Alunos',
+          tabBarIcon: () => (
+            <Icon name="people" color={theme.colors.primary} size={20} />
+          ),
         }}
       />
-      <Stack.Screen
-        component={Empresa}
-        name="Empresa"
+      <Tab.Screen
+        component={Empresas}
+        name="Empresas"
         options={{
-          presentation: 'modal',
+          tabBarLabel: 'Empresas',
+          tabBarIcon: () => (
+            <Icon name="business" color={theme.colors.primary} size={20} />
+          ),
         }}
       />
-      <Stack.Screen
-        component={PerfilUsuario}
-        name="PerfilUsuario"
+      <Tab.Screen
+        component={Cursos}
+        name="Cursos"
         options={{
-          presentation: 'modal',
+          tabBarLabel: 'Cursos',
+          tabBarIcon: () => (
+            <Icon name="rocket" color={theme.colors.primary} size={20} />
+          ),
         }}
       />
-      <Stack.Screen
-        component={EmpresasMap}
-        name="EmpresasMap"
+      <Tab.Screen
+        component={Menu}
+        name="Menu"
         options={{
-          presentation: 'modal',
+          tabBarLabel: 'Menu',
+          tabBarIcon: () => (
+            <Icon name="list" color={theme.colors.primary} size={20} />
+          ),
         }}
       />
-    </Stack.Navigator>
-  </NavigationContainer>
-);
+    </Tab.Navigator>
+  );
+};
+
+const Navigator = () => {
+  const {theme} = useTheme();
+  return (
+    <NavigationContainer
+      theme={{
+        colors: {
+          primary: theme.colors.primary,
+          background: theme.colors.background,
+          card: theme.colors.background,
+        },
+        dark: theme.mode === 'light',
+      }}>
+      <StatusBar backgroundColor={theme.colors.primaryDark} />
+      <Stack.Navigator
+        initialRouteName="AuthStack"
+        screenOptions={{
+          headerShown: false,
+        }}>
+        <Stack.Screen component={AuthStack} name="AuthStack" />
+        <Stack.Screen component={AppStack} name="AppStack" />
+        <Stack.Screen
+          component={Estudante}
+          name="Estudante"
+          options={{
+            presentation: 'modal',
+          }}
+        />
+        <Stack.Screen
+          component={Empresa}
+          name="Empresa"
+          options={{
+            presentation: 'modal',
+          }}
+        />
+        <Stack.Screen
+          component={PerfilUsuario}
+          name="PerfilUsuario"
+          options={{
+            presentation: 'modal',
+          }}
+        />
+        <Stack.Screen
+          component={EmpresasMap}
+          name="EmpresasMap"
+          options={{
+            presentation: 'modal',
+          }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
 export default Navigator;
