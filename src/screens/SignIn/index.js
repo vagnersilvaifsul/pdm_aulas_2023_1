@@ -2,12 +2,11 @@ import React, {useContext, useState} from 'react';
 import {ScrollView, View, StyleSheet, Alert} from 'react-native';
 import MyButtom from '../../components/MyButtom';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {Input, Text, Image} from '@rneui/themed';
 import {CommonActions} from '@react-navigation/native';
 import Loading from '../../components/Loading';
 import {AuthUserContext} from '../../context/AuthUserProvider';
+import {Input, Icon, Text, Image} from '@rneui/themed';
 import {useTheme} from '@rneui/themed';
-import {Icon} from '@rneui/themed';
 
 const SignIn = ({navigation}) => {
   const [email, setEmail] = useState('');
@@ -115,8 +114,8 @@ const SignIn = ({navigation}) => {
             returnKeyType="next"
             leftIcon={
               <Icon
-                name="card"
-                type="ionicon"
+                name="email-check-outline"
+                type="material-community"
                 size={22}
                 color={theme.colors.grey2}
               />
@@ -131,16 +130,16 @@ const SignIn = ({navigation}) => {
             leftIcon={
               showPass ? (
                 <Icon
-                  name="eye-off"
-                  type="ionicon"
+                  name="form-textbox-password"
+                  type="material-community"
                   size={22}
                   color={theme.colors.grey2}
                   onPress={() => setShowPass(false)}
                 />
               ) : (
                 <Icon
-                  name="eye"
-                  type="ionicon"
+                  name="form-textbox-password"
+                  type="material-community"
                   size={22}
                   color={theme.colors.error}
                   onPress={() => setShowPass(true)}
