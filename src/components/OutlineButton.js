@@ -16,16 +16,13 @@ const styles = StyleSheet.create({
   title: {color: COLORS.primary},
 });
 
-const DeleteButton = ({texto, onClick}) => {
-  return (
-    <Button
-      title={texto}
-      type="outline"
-      containerStyle={styles.container}
-      buttonStyle={styles.button}
-      titleStyle={styles.title}
-      onPress={onClick}
-    />
-  );
-};
-export default DeleteButton;
+export default ({texto, onClick}) => (
+  <Button
+    title={texto}
+    type="outline"
+    containerStyle={styles.container}
+    buttonStyle={styles.button}
+    titleStyle={styles.title}
+    onPress={onClick}
+  />
+);

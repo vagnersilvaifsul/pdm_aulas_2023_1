@@ -3,9 +3,8 @@ import {Container, TextInput, Scroll} from './styles';
 import {Alert, StyleSheet, ToastAndroid} from 'react-native';
 import MyButton from '../../components/MyButtom';
 import Loading from '../../components/Loading';
-import DeleteButton from '../../components/DeleteButton';
+import DeleteButton from '../../components/OutlineButton';
 import {EstudanteContext} from '../../context/EstudanteProvider';
-//import {Image} from '@rneui/base';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {Image, ButtonGroup} from '@rneui/themed';
 
@@ -192,7 +191,7 @@ const Estudante = ({route, navigation}) => {
             }}
           />
         )}
-        {loading && <Loading />}
+        <Loading visivel={loading} />
       </Container>
     </Scroll>
   );

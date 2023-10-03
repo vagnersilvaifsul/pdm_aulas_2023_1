@@ -2,7 +2,7 @@ import React, {useState, useEffect, useContext} from 'react';
 import {Alert, ToastAndroid} from 'react-native';
 import {Container, TextInput} from './styles';
 import MyButtom from '../../components/MyButtom';
-import DeleteButton from '../../components/DeleteButton';
+import DeleteButton from '../../components/OutlineButton';
 import Loading from '../../components/Loading';
 import {EmpresaContext} from '../../context/EmpresaProvider';
 
@@ -135,7 +135,7 @@ const Empresa = ({route, navigation}) => {
         texto="Obter Coordenadas no Mapa"
         onClick={() => navigation.navigate('EmpresasMap', {onGoBack})}
       />
-      {loading && <Loading />}
+      <Loading visivel={loading} />
     </Container>
   );
 };

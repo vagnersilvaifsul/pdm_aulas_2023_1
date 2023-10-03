@@ -137,7 +137,7 @@ const SignUp = ({navigation}) => {
         onChangeText={t => setConfirmPass(t)}
       />
       <MyButtom text="Cadastrar" onClick={cadastar} />
-      {loading && <Loading />}
+      <Loading visivel={loading} />
     </Body>
   );
 };

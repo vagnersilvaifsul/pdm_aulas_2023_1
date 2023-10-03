@@ -1,8 +1,8 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
-import {Card, Text, Button, Image} from '@rneui/base';
+import {Card, Text, Image} from '@rneui/themed';
 import {COLORS} from '../../assets/colors';
-import Loading from '../../components/Loading';
+import OutlineButton from '../../components/OutlineButton';
 
 const Item = ({item, onPress}) => {
   return (
@@ -10,20 +10,14 @@ const Item = ({item, onPress}) => {
       <Card.Title style={styles.curso}>{item.curso}</Card.Title>
       <Card.Divider />
       <View style={styles.estudante}>
-        <Image
-          style={styles.urlFoto}
-          source={{uri: item.urlFoto}}
-          PlaceholderContent={<Loading />}
-        />
+        <Image style={styles.urlFoto} source={{uri: item.urlFoto}} />
         <Text style={styles.nome}>{item.nome}</Text>
       </View>
-      <Button
-        title={'Detalhar'}
-        type="outline"
+      <OutlineButton
+        texto={'Detalhar'}
+        onClick={onPress}
         containerStyle={styles.container_button}
         buttonStyle={styles.button}
-        titleStyle={{color: COLORS.primaryDark}}
-        onPress={onPress}
       />
     </Card>
   );
@@ -61,18 +55,20 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: COLORS.transparent,
     marginRight: 20,
     borderRadius: 50 / 2,
   },
   container_button: {
-    marginTop: 5,
-    width: 100,
-    height: 40,
+    width: 50,
     alignSelf: 'center',
-    borderColor: COLORS.primaryDark,
+    backgroundColor: COLORS.transparent,
   },
   button: {
-    borderColor: COLORS.primaryDark,
-    borderRadius: 3,
+    height: 24,
+    alignSelf: 'center',
+    backgroundColor: COLORS.transparent,
+    borderColor: COLORS.primary,
+    borderWidth: 1,
   },
 });

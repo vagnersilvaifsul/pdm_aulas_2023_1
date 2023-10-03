@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import {Alert, ToastAndroid, StyleSheet} from 'react-native';
 import {Body, Scroll, TextInput} from './styles';
 import MyButtom from '../../components/MyButtom';
-import DeleteButton from '../../components/DeleteButton';
+import DeleteButton from '../../components/OutlineButton';
 import Loading from '../../components/Loading';
 import {AuthUserContext} from '../../context/AuthUserProvider';
 import {UserContext} from '../../context/UserProvider';
@@ -277,7 +277,7 @@ const PerfilUsuario = ({navigation}) => {
         <MyButtom text="Salvar" onClick={salvar} />
         <DeleteButton texto="Excluir Conta" onClick={excluir} />
         <DeleteButton texto="Alterar Senha" onClick={alterarSenha} />
-        {loading && <Loading />}
+        <Loading visivel={loading} />
       </Body>
     </Scroll>
   );

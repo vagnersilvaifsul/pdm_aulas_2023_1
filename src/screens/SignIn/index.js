@@ -171,7 +171,7 @@ const SignIn = ({navigation}) => {
           </View>
         </View>
       </ScrollView>
-      {loading && <Loading />}
+      <Loading visivel={loading} />
     </SafeAreaView>
   );
 };
