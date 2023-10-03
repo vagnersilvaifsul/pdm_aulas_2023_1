@@ -5,7 +5,7 @@ import Item from './Item';
 import AddFloatButton from '../../components/AddFloatButton';
 import SearchBar from '../../components/SearchBar';
 
-const Estudantes = ({navigation}) => {
+export default ({navigation}) => {
   const {estudantes} = useContext(EstudanteContext);
   const [estudantesTemp, setEstudantesTemp] = useState([]);
 
@@ -66,4 +66,3 @@ const styles = StyleSheet.create({
     padding: 5,
   },
 });
-export default Estudantes;

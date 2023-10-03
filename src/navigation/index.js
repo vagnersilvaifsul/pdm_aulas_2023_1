@@ -17,6 +17,7 @@ const theme = createTheme({
     accentSecundary: COLORS.accentSecundary,
     background: COLORS.white,
     error: COLORS.errror,
+    transparent: COLORS.transparent,
   },
   darkColors: {
     primary: COLORS.primary,
@@ -29,11 +30,13 @@ const theme = createTheme({
         width: '85%',
         height: 50,
         justifyContent: 'center',
+        alignSelf: 'center',
         margin: 10,
         backgroundColor: COLORS.accent,
         borderRadius: 5,
       },
       buttonStyle: {
+        height: 48,
         backgroundColor: COLORS.accent,
         borderRadius: 3,
       },
