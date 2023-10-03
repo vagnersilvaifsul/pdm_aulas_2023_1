@@ -6,4 +6,5 @@ export const COLORS = {
   grey: '#ccc',
   white: 'rgb(242,242,242)',
   errror: '#D81B60',
+  transparent: 'transparent',
 };

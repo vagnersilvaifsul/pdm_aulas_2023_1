@@ -1,32 +1,31 @@
 import React from 'react';
-import {Text, StyleSheet, TouchableHighlight} from 'react-native';
-
+import {StyleSheet} from 'react-native';
+import {Button} from '@rneui/themed';
 import {COLORS} from '../assets/colors';
 
 const styles = StyleSheet.create({
-  text: {
-    fontSize: 20,
-    color: COLORS.primaryDark,
+  container: {
+    backgroundColor: COLORS.transparent,
   },
   button: {
-    width: '95%',
-    height: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fff0',
-    padding: 10,
-    margin: 10,
-    borderRadius: 5,
+    height: 48,
+    backgroundColor: COLORS.transparent,
+    borderColor: COLORS.primary,
     borderWidth: 1,
-    borderColor: COLORS.primaryDark,
   },
+  title: {color: COLORS.primary},
 });
 
 const DeleteButton = ({texto, onClick}) => {
   return (
-    <TouchableHighlight style={styles.button} onPress={onClick}>
-      <Text style={styles.text}>{texto}</Text>
-    </TouchableHighlight>
+    <Button
+      title={texto}
+      type="outline"
+      containerStyle={styles.container}
+      buttonStyle={styles.button}
+      titleStyle={styles.title}
+      onPress={onClick}
+    />
   );
 };
 export default DeleteButton;
