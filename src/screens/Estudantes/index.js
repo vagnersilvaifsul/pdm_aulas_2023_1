@@ -2,7 +2,7 @@ import React, {useContext, useState} from 'react';
 import {View, StyleSheet, FlatList} from 'react-native';
 import {EstudanteContext} from '../../context/EstudanteProvider';
 import Item from './Item';
-import AddFloatButton from '../../components/AddFloatButton';
+import FloatButtonAdd from '../../components/FloatButtonAdd';
 import SearchBar from '../../components/SearchBar';
 
 export default ({navigation}) => {
@@ -55,7 +55,7 @@ export default ({navigation}) => {
         )}
         keyExtractor={item => item.uid}
       />
-      <AddFloatButton onClick={() => routeStudent(null)} />
+      <FloatButtonAdd onClick={() => routeStudent(null)} />
     </View>
   );
 };

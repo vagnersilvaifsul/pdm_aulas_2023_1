@@ -2,7 +2,7 @@ import React, {useContext, useState} from 'react';
 import {CommonActions} from '@react-navigation/native';
 import {Container, FlatList} from './styles';
 import Item from './Item';
-import AddFloatButton from '../../components/AddFloatButton';
+import FloatButtonAdd from '../../components/FloatButtonAdd';
 import {EmpresaContext} from '../../context/EmpresaProvider';
 import SearchBar from '../../components/SearchBar';
 import MyButtom from '../../components/MyButtom';
@@ -69,7 +69,7 @@ const Empresas = ({navigation}) => {
         renderItem={renderItem}
         keyExtractor={item => item.uid}
       />
-      <AddFloatButton onClick={routeAddCompany} />
+      <FloatButtonAdd onClick={routeAddCompany} />
     </Container>
   );
 };
