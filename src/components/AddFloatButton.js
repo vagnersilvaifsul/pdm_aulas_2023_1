@@ -1,27 +1,16 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import styled from 'styled-components/native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import {useTheme, FAB} from '@rneui/themed';
 
-import {COLORS} from '../assets/colors';
-
-const Button = styled.TouchableOpacity`
-  border-width: 0px;
-  align-items: center;
-  justify-content: center;
-  width: 60px;
-  height: 60px;
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  background-color: ${COLORS.accent};
-  border-radius: 100px;
-`;
-
-const AddFloatButton = ({onClick}) => {
+export default ({onClick}) => {
+  const {theme} = useTheme();
   return (
-    <Button onPress={() => onClick()}>
-      <Icon name="add" size={30} color={COLORS.white} />
-    </Button>
+    <FAB
+      visible={true}
+      icon={{type: 'ionicon', name: 'add', color: 'white'}}
+      color={theme.colors.secondary}
+      onPress={() => onClick()}
+      containerStyle={{position: 'absolute', bottom: 10, right: 10}}
+    />
   );
 };
-export default AddFloatButton;
