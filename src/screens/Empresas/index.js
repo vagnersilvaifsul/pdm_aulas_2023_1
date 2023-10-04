@@ -59,7 +59,7 @@ const Empresas = ({navigation}) => {
 
   return (
     <Container>
-      <SearchBar text="digite o nome da empresa" setSearch={filterByName} />
+      <SearchBar text="Pesquise pelo nome do aluno" setSearch={filterByName} />
       <MyButtom
         text="Visualizar no Mapa"
         onClick={() => navigation.navigate('EmpresasMap')}

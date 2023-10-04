@@ -40,7 +40,7 @@ export default ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <SearchBar text="digite o nome do aluno" setSearch={filterByName} />
+      <SearchBar text="Pesquise pelo nome do aluno" setSearch={filterByName} />
       {/* {estudantesTemp.length > 0
         ? estudantesTemp.map((v, k) => (
             <Item item={v} onPress={() => routeStudent(v)} key={k} />
