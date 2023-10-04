@@ -4,7 +4,6 @@ import {useTheme, FAB} from '@rneui/themed';
 
 export default ({onClick}) => {
   const {theme} = useTheme();
-  //TODO: resolver o problema com a color na prop color do icon
   return (
     <FAB
       visible={true}
