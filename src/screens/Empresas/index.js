@@ -1,13 +1,22 @@
 import React, {useContext, useState} from 'react';
 import {CommonActions} from '@react-navigation/native';
-import {Container, FlatList} from './styles';
+import styled from 'styled-components/native';
 import Item from './Item';
 import FloatButtonAdd from '../../components/FloatButtonAdd';
 import {EmpresaContext} from '../../context/EmpresaProvider';
 import SearchBar from '../../components/SearchBar';
-import MyButtom from '../../components/MyButtom';
 
-const Empresas = ({navigation}) => {
+export const Container = styled.SafeAreaView`
+  flex: 1;
+  padding: 5px;
+`;
+
+export const FlatList = styled.FlatList`
+  width: 100%;
+  height: 100%;
+`;
+
+export default ({navigation}) => {
   const {empresas} = useContext(EmpresaContext);
   const [empresasTemp, setEmpresasTemp] = useState([]);
 
@@ -59,10 +68,9 @@ const Empresas = ({navigation}) => {
 
   return (
     <Container>
-      <SearchBar text="Pesquise pelo nome do aluno" setSearch={filterByName} />
-      <MyButtom
-        text="Visualizar no Mapa"
-        onClick={() => navigation.navigate('EmpresasMap')}
+      <SearchBar
+        text="Pesquise pelo nome da empresa"
+        setSearch={filterByName}
       />
       <FlatList
         data={empresasTemp.length > 0 ? empresasTemp : empresas}
@@ -73,4 +81,3 @@ const Empresas = ({navigation}) => {
     </Container>
   );
 };
-export default Empresas;

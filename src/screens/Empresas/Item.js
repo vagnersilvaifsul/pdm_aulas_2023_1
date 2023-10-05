@@ -1,36 +1,43 @@
 import React from 'react';
-import styled from 'styled-components/native';
-import {COLORS} from '../../assets/colors';
+import {StyleSheet, View} from 'react-native';
+import {useTheme, Card, Text} from '@rneui/themed';
+import OutlineButton from '../../components/OutlineButton';
 
-const Button = styled.TouchableHighlight`
-  width: 100%;
-  height: 100px;
-  background-color: ${COLORS.primary};
-  padding: 20px;
-  margin-top: 10px;
-  border-radius: 10px;
-`;
+export default ({item, onPress}) => {
+  const {theme} = useTheme();
 
-const TextNome = styled.Text`
-  font-size: 24px;
-  color: ${COLORS.white};
-`;
+  const styles = StyleSheet.create({
+    container: {
+      alignContent: 'center',
+      alignItems: 'center',
+      borderRadius: 10,
+      borderColor: theme.colors.primaryDark,
+      backgroundColor: theme.colors.background,
+    },
+    empresa: {
+      color: theme.colors.primaryDark,
+      fontSize: 20,
+      fontWeight: 'bold',
+    },
+    container_tecnologias: {
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    tecnologias: {
+      textAlign: 'center',
+      color: theme.colors.primaryDark,
+      fontSize: 16,
+    },
+  });
 
-const TextTecnologias = styled.Text`
-  font-size: 16px;
-  text-align: justify;
-  color: ${COLORS.white};
-`;
-
-const Item = ({item, onPress}) => {
-  //console.log(item);
   return (
-    <Button onPress={onPress} underlayColor="transparent">
-      <>
-        <TextNome>{item.nome}</TextNome>
-        <TextTecnologias>{item.tecnologias}</TextTecnologias>
-      </>
-    </Button>
+    <Card containerStyle={styles.container}>
+      <Card.Title style={styles.empresa}>{item.nome}</Card.Title>
+      <Card.Divider />
+      <View style={styles.container_tecnologias}>
+        <Text style={styles.tecnologias}>{item.tecnologias}</Text>
+      </View>
+      <OutlineButton texto={'Detalhar'} onClick={onPress} />
+    </Card>
   );
 };
-export default Item;

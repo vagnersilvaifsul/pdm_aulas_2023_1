@@ -73,6 +73,21 @@ const AppStack = () => {
         }}
       />
       <Tab.Screen
+        component={EmpresasMap}
+        name="EmpresasMap"
+        options={{
+          tabBarLabel: 'Mapa',
+          tabBarIcon: () => (
+            <Icon
+              type="ionicon"
+              name="map-sharp"
+              color={theme.colors.primary}
+              size={20}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
         component={Cursos}
         name="Cursos"
         options={{
@@ -143,13 +158,6 @@ const Navigator = () => {
         <Stack.Screen
           component={PerfilUsuario}
           name="PerfilUsuario"
-          options={{
-            presentation: 'modal',
-          }}
-        />
-        <Stack.Screen
-          component={EmpresasMap}
-          name="EmpresasMap"
           options={{
             presentation: 'modal',
           }}
