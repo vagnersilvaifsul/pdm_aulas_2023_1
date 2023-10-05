@@ -1,9 +1,19 @@
 import React, {useContext, useState} from 'react';
-import {View, StyleSheet, FlatList} from 'react-native';
+import styled from 'styled-components/native';
 import {EstudanteContext} from '../../context/EstudanteProvider';
 import Item from './Item';
 import FloatButtonAdd from '../../components/FloatButtonAdd';
 import SearchBar from '../../components/SearchBar';
+
+const Container = styled.SafeAreaView`
+  flex: 1;
+  padding: 5px;
+`;
+
+const FlatList = styled.FlatList`
+  width: 100%;
+  height: 100%;
+`;
 
 export default ({navigation}) => {
   const {estudantes} = useContext(EstudanteContext);
@@ -39,7 +49,7 @@ export default ({navigation}) => {
   };
 
   return (
-    <View style={styles.container}>
+    <Container>
       <SearchBar text="Pesquise pelo nome do aluno" setSearch={filterByName} />
       {/* {estudantesTemp.length > 0
         ? estudantesTemp.map((v, k) => (
@@ -56,13 +66,6 @@ export default ({navigation}) => {
         keyExtractor={item => item.uid}
       />
       <FloatButtonAdd onClick={() => routeStudent(null)} />
-    </View>
+    </Container>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 5,
-  },
-});

@@ -7,20 +7,24 @@ export default ({item, onPress}) => {
   const {theme} = useTheme();
 
   const styles = StyleSheet.create({
-    container: {
+    card: {
       alignContent: 'center',
       alignItems: 'center',
       borderRadius: 10,
       borderColor: theme.colors.primaryDark,
       backgroundColor: theme.colors.background,
     },
-    empresa: {
+    title: {
       color: theme.colors.primaryDark,
       fontSize: 20,
       fontWeight: 'bold',
     },
-    container_tecnologias: {
+    divider: {
+      width: 260,
+    },
+    div_tecnologias: {
       flexDirection: 'row',
+      justifyContent: 'center',
       alignItems: 'center',
     },
     tecnologias: {
@@ -31,10 +35,10 @@ export default ({item, onPress}) => {
   });
 
   return (
-    <Card containerStyle={styles.container}>
-      <Card.Title style={styles.empresa}>{item.nome}</Card.Title>
-      <Card.Divider />
-      <View style={styles.container_tecnologias}>
+    <Card containerStyle={styles.card}>
+      <Card.Title style={styles.title}>{item.nome}</Card.Title>
+      <Card.Divider color={theme.colors.primary} style={styles.divider} />
+      <View style={styles.div_tecnologias}>
         <Text style={styles.tecnologias}>{item.tecnologias}</Text>
       </View>
       <OutlineButton texto={'Detalhar'} onClick={onPress} />

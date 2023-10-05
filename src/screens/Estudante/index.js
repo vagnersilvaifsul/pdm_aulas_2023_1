@@ -1,14 +1,24 @@
 import React, {useEffect, useState, useContext} from 'react';
-import {Container, TextInput, Scroll} from './styles';
-import {Alert, StyleSheet, ToastAndroid} from 'react-native';
+import {Alert, ToastAndroid} from 'react-native';
+import styled from 'styled-components/native';
 import MyButton from '../../components/MyButtom';
 import Loading from '../../components/Loading';
 import DeleteButton from '../../components/OutlineButton';
 import {EstudanteContext} from '../../context/EstudanteProvider';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
-import {Image, ButtonGroup} from '@rneui/themed';
+import {Image, ButtonGroup, Input} from '@rneui/themed';
 
-const Estudante = ({route, navigation}) => {
+const Container = styled.SafeAreaView`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  padding-top: 20px;
+`;
+
+const Scroll = styled.ScrollView``;
+
+export default ({route, navigation}) => {
   const [nome, setNome] = useState('');
   const [curso, setCurso] = useState('');
   const [uid, setUid] = useState('');
@@ -156,21 +166,20 @@ const Estudante = ({route, navigation}) => {
                   uri: 'https://firebasestorage.googleapis.com/v0/b/pdm-aulas-797c8.appspot.com/o/images%2Fperson.png?alt=media&token=2be8523f-4c17-4a09-afbb-301a95a5ddfb&_gl=1*18jiiyk*_ga*MjA2NDY5NjU3NS4xNjg4MTI5NjYw*_ga_CW55HF8NVT*MTY5NjAyMzQxOS4zMS4xLjE2OTYwMjU4NzQuMzMuMC4w',
                 }
           }
-          containerStyle={styles.image}
           PlaceholderContent={<Loading />}
         />
         <ButtonGroup
           buttons={['Buscar na Galeria', 'Tira Foto']}
           onPress={v => buscarImagemNoDevice(v)}
         />
-        <TextInput
+        <Input
           placeholder="Nome"
           keyboardType="default"
           returnKeyType="go"
           onChangeText={t => setNome(t)}
           value={nome}
         />
-        <TextInput
+        <Input
           placeholder="Curso"
           keyboardType="default"
           returnKeyType="go"
@@ -196,14 +205,3 @@ const Estudante = ({route, navigation}) => {
     </Scroll>
   );
 };
-export default Estudante;
-
-//estilo aplicado em componentes RNE
-const styles = StyleSheet.create({
-  image: {
-    width: 150,
-    height: 200,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});

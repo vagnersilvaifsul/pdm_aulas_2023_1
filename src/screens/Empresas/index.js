@@ -6,12 +6,12 @@ import FloatButtonAdd from '../../components/FloatButtonAdd';
 import {EmpresaContext} from '../../context/EmpresaProvider';
 import SearchBar from '../../components/SearchBar';
 
-export const Container = styled.SafeAreaView`
+const Container = styled.SafeAreaView`
   flex: 1;
   padding: 5px;
 `;
 
-export const FlatList = styled.FlatList`
+const FlatList = styled.FlatList`
   width: 100%;
   height: 100%;
 `;
@@ -62,10 +62,6 @@ export default ({navigation}) => {
     );
   };
 
-  const renderItem = ({item}) => (
-    <Item item={item} onPress={() => routeCompany(item)} />
-  );
-
   return (
     <Container>
       <SearchBar
@@ -74,7 +70,9 @@ export default ({navigation}) => {
       />
       <FlatList
         data={empresasTemp.length > 0 ? empresasTemp : empresas}
-        renderItem={renderItem}
+        renderItem={({item}) => (
+          <Item item={item} onPress={() => routeCompany(item)} />
+        )}
         keyExtractor={item => item.uid}
       />
       <FloatButtonAdd onClick={routeAddCompany} />

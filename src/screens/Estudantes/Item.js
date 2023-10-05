@@ -5,27 +5,28 @@ import OutlineButton from '../../components/OutlineButton';
 
 export default ({item, onPress}) => {
   const {theme} = useTheme();
+
   const styles = StyleSheet.create({
-    container: {
+    card: {
       alignContent: 'center',
       alignItems: 'center',
       borderRadius: 10,
       borderColor: theme.colors.primaryDark,
       backgroundColor: theme.colors.background,
     },
-    curso: {
+    title: {
       color: theme.colors.primaryDark,
     },
-    estudante: {
+    divider: {
+      width: 260,
+    },
+    div_estudante: {
       flexDirection: 'row',
       alignItems: 'center',
     },
-    urlFoto: {
+    foto: {
       width: 50,
       height: 50,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: theme.colors.transparent,
       marginRight: 20,
       borderRadius: 50 / 2,
     },
@@ -38,11 +39,11 @@ export default ({item, onPress}) => {
   });
 
   return (
-    <Card containerStyle={styles.container}>
-      <Card.Title style={styles.curso}>{item.curso}</Card.Title>
-      <Card.Divider />
-      <View style={styles.estudante}>
-        <Image style={styles.urlFoto} source={{uri: item.urlFoto}} />
+    <Card containerStyle={styles.card}>
+      <Card.Title style={styles.title}>{item.curso}</Card.Title>
+      <Card.Divider color={theme.colors.primary} style={styles.divider} />
+      <View style={styles.div_estudante}>
+        <Image containerStyle={styles.foto} source={{uri: item.urlFoto}} />
         <Text style={styles.nome}>{item.nome}</Text>
       </View>
       <OutlineButton texto={'Detalhar'} onClick={onPress} />

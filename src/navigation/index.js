@@ -50,6 +50,15 @@ const theme = createTheme({
       },
       textStyle: {color: COLORS.primary},
     },
+    Image: {
+      containerStyle: {
+        width: 150,
+        height: 200,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: theme.colors.transparent,
+      },
+    },
   },
 });
 

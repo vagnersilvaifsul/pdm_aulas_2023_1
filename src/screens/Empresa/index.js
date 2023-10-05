@@ -1,12 +1,23 @@
 import React, {useState, useEffect, useContext} from 'react';
 import {Alert, ToastAndroid} from 'react-native';
-import {Container, TextInput} from './styles';
+import styled from 'styled-components/native';
 import MyButtom from '../../components/MyButtom';
 import DeleteButton from '../../components/OutlineButton';
 import Loading from '../../components/Loading';
 import {EmpresaContext} from '../../context/EmpresaProvider';
+import {Input} from '@rneui/themed';
 
-const Empresa = ({route, navigation}) => {
+const Container = styled.SafeAreaView`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  padding-top: 20px;
+`;
+
+const Scroll = styled.ScrollView``;
+
+export default ({route, navigation}) => {
   const [nome, setNome] = useState('');
   const [tecnologias, setTeconologias] = useState('');
   const [uid, setUid] = useState('');
@@ -98,22 +109,23 @@ const Empresa = ({route, navigation}) => {
   }
 
   return (
+    <Scroll>
     <Container>
-      <TextInput
+      <Input
         placeholder="Nome da Empresa"
         keyboardType="default"
         returnKeyType="go"
         onChangeText={t => setNome(t)}
         value={nome}
       />
-      <TextInput
+      <Input
         placeholder="Tecnologias (separadas por , )"
         keyboardType="default"
         returnKeyType="go"
         onChangeText={t => setTeconologias(t)}
         value={tecnologias}
       />
-      <TextInput
+      <Input
         placeholder="Latitude"
         editable={false}
         keyboardType="default"
@@ -121,7 +133,7 @@ const Empresa = ({route, navigation}) => {
         onChangeText={t => setTeconologias(t)}
         value={latitude}
       />
-      <TextInput
+      <Input
         placeholder="Longitude"
         editable={false}
         keyboardType="default"
@@ -137,6 +149,6 @@ const Empresa = ({route, navigation}) => {
       />
       <Loading visivel={loading} />
     </Container>
+    </Scroll>
   );
 };
-export default Empresa;
