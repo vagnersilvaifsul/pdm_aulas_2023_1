@@ -15,9 +15,8 @@ import Cursos from '../screens/Cursos';
 import ForgotPassWord from '../screens/ForgotPassword';
 import EmpresasMap from '../screens/EmpresasMap';
 import Menu from '../screens/Menu';
-import Icon from 'react-native-vector-icons/Ionicons';
 import PerfilUsuario from '../screens/PerfilUsuario';
-import {useTheme} from '@rneui/themed';
+import {useTheme, Icon} from '@rneui/themed';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -49,7 +48,12 @@ const AppStack = () => {
         options={{
           tabBarLabel: 'Alunos',
           tabBarIcon: () => (
-            <Icon name="people" color={theme.colors.primary} size={20} />
+            <Icon
+              type="ionicon"
+              name="people"
+              color={theme.colors.primary}
+              size={20}
+            />
           ),
         }}
       />
@@ -59,7 +63,12 @@ const AppStack = () => {
         options={{
           tabBarLabel: 'Empresas',
           tabBarIcon: () => (
-            <Icon name="business" color={theme.colors.primary} size={20} />
+            <Icon
+              type="ionicon"
+              name="business"
+              color={theme.colors.primary}
+              size={20}
+            />
           ),
         }}
       />
@@ -69,7 +78,12 @@ const AppStack = () => {
         options={{
           tabBarLabel: 'Cursos',
           tabBarIcon: () => (
-            <Icon name="rocket" color={theme.colors.primary} size={20} />
+            <Icon
+              type="ionicon"
+              name="rocket"
+              color={theme.colors.primary}
+              size={20}
+            />
           ),
         }}
       />
@@ -79,7 +93,12 @@ const AppStack = () => {
         options={{
           tabBarLabel: 'Menu',
           tabBarIcon: () => (
-            <Icon name="list" color={theme.colors.primary} size={20} />
+            <Icon
+              type="ionicon"
+              name="list"
+              color={theme.colors.primary}
+              size={20}
+            />
           ),
         }}
       />
