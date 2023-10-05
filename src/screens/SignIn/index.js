@@ -5,8 +5,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {CommonActions} from '@react-navigation/native';
 import Loading from '../../components/Loading';
 import {AuthUserContext} from '../../context/AuthUserProvider';
-import {Input, Icon, Text, Image} from '@rneui/themed';
-import {useTheme} from '@rneui/themed';
+import {useTheme, Input, Icon, Text, Image} from '@rneui/themed';
 
 const SignIn = ({navigation}) => {
   const [email, setEmail] = useState('');

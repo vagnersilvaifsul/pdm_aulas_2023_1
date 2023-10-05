@@ -56,7 +56,7 @@ const theme = createTheme({
         height: 200,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: theme.colors.transparent,
+        backgroundColor: COLORS.transparent,
       },
     },
   },
