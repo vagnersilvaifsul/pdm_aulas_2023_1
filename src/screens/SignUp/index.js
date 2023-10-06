@@ -14,7 +14,7 @@ export const Body = styled.SafeAreaView`
   margin-top: 40px;
 `;
 
-const SignUp = ({navigation}) => {
+export default ({navigation}) => {
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
@@ -118,16 +118,16 @@ const SignUp = ({navigation}) => {
         leftIcon={
           showPass ? (
             <Icon
-              name="form-textbox-password"
               type="material-community"
+              name="form-textbox-password"
               size={22}
               color={theme.colors.grey2}
               onPress={() => setShowPass(false)}
             />
           ) : (
             <Icon
-              name="form-textbox-password"
               type="material-community"
+              name="form-textbox-password"
               size={22}
               color={theme.colors.error}
               onPress={() => setShowPass(true)}
@@ -141,4 +141,3 @@ const SignUp = ({navigation}) => {
     </Body>
   );
 };
-export default SignUp;

@@ -1,16 +1,26 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {Alert, ToastAndroid, StyleSheet} from 'react-native';
-import {Body, Scroll, TextInput} from './styles';
+import styled from 'styled-components/native';
 import MyButtom from '../../components/MyButtom';
 import DeleteButton from '../../components/OutlineButton';
 import Loading from '../../components/Loading';
 import {AuthUserContext} from '../../context/AuthUserProvider';
 import {UserContext} from '../../context/UserProvider';
 import {CommonActions} from '@react-navigation/native';
-import {Image, ButtonGroup} from '@rneui/themed';
+import {useTheme, Image, ButtonGroup, Input, Icon} from '@rneui/themed';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 
-const PerfilUsuario = ({navigation}) => {
+const Container = styled.SafeAreaView`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  padding-top: 20px;
+`;
+
+const Scroll = styled.ScrollView``;
+
+export default ({navigation}) => {
   const {user} = useContext(AuthUserContext);
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
@@ -20,6 +30,7 @@ const PerfilUsuario = ({navigation}) => {
   const [loading, setLoading] = useState(false);
   const [urlDevice, setUrlDevice] = useState('');
   const {save, del, updatePassword} = useContext(UserContext);
+  const {theme} = useTheme();
 
   useEffect(() => {
     if (user) {
@@ -218,7 +229,7 @@ const PerfilUsuario = ({navigation}) => {
 
   return (
     <Scroll>
-      <Body>
+      <Container>
         <Image
           source={
             urlDevice !== ''
@@ -236,54 +247,92 @@ const PerfilUsuario = ({navigation}) => {
           buttons={['Buscar na Galeria', 'Tira Foto']}
           onPress={v => buscarImagemNoDevice(v)}
         />
-        <TextInput
+        <Input
           value={nome}
           placeholder="nome"
           keyboardType="default"
           returnKeyType="next"
+          leftIcon={
+            <Icon
+              type="ionicon"
+              name="person-outline"
+              size={22}
+              color={theme.colors.grey2}
+            />
+          }
           onChangeText={t => setNome(t)}
         />
-        <TextInput
+        <Input
           value={email}
           editable={false}
           placeholder="email"
           keyboardType="default"
           returnKeyType="next"
+          leftIcon={
+            <Icon
+              type="material-community"
+              name="email-check-outline"
+              size={22}
+              color={theme.colors.grey2}
+            />
+          }
         />
-        <TextInput
+        <Input
           value={oldPass}
           secureTextEntry={true}
           placeholder="Senha antiga"
           keyboardType="default"
           returnKeyType="next"
+          leftIcon={
+            <Icon
+              type="material-community"
+              name="form-textbox-password"
+              size={22}
+              color={theme.colors.grey2}
+            />
+          }
           onChangeText={t => setOldPass(t)}
         />
-        <TextInput
+        <Input
           value={newPass}
           secureTextEntry={true}
           placeholder="Nova senha (mín. 6 caracteres)"
           keyboardType="default"
           returnKeyType="next"
+          leftIcon={
+            <Icon
+              type="material-community"
+              name="form-textbox-password"
+              size={22}
+              color={theme.colors.grey2}
+            />
+          }
           onChangeText={t => setNewPass(t)}
         />
-        <TextInput
+        <Input
           value={newPassConfirm}
           secureTextEntry={true}
           placeholder="Confirme a nova senha"
           keyboardType="default"
           returnKeyType="next"
+          leftIcon={
+            <Icon
+              type="material-community"
+              name="form-textbox-password"
+              size={22}
+              color={theme.colors.grey2}
+            />
+          }
           onChangeText={t => setNePassConfirm(t)}
         />
         <MyButtom text="Salvar" onClick={salvar} />
         <DeleteButton texto="Excluir Conta" onClick={excluir} />
         <DeleteButton texto="Alterar Senha" onClick={alterarSenha} />
         <Loading visivel={loading} />
-      </Body>
+      </Container>
     </Scroll>
   );
 };
-
-export default PerfilUsuario;
 
 //estilo aplicado em componentes RNE
 const styles = StyleSheet.create({

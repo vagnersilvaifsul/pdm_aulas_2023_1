@@ -6,7 +6,7 @@ import Loading from '../../components/Loading';
 import DeleteButton from '../../components/OutlineButton';
 import {EstudanteContext} from '../../context/EstudanteProvider';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
-import {Image, ButtonGroup, Input} from '@rneui/themed';
+import {useTheme, Image, ButtonGroup, Input, Icon} from '@rneui/themed';
 
 const Container = styled.SafeAreaView`
   flex: 1;
@@ -26,6 +26,7 @@ export default ({route, navigation}) => {
   const [urlFoto, setUrlFoto] = useState('');
   const [urlDevice, setUrlDevice] = useState('');
   const {save, del} = useContext(EstudanteContext);
+  const {theme} = useTheme();
 
   useEffect(() => {
     if (route.params.value) {
@@ -176,6 +177,14 @@ export default ({route, navigation}) => {
           placeholder="Nome"
           keyboardType="default"
           returnKeyType="go"
+          leftIcon={
+            <Icon
+              type="ionicon"
+              name="person-outline"
+              size={22}
+              color={theme.colors.grey2}
+            />
+          }
           onChangeText={t => setNome(t)}
           value={nome}
         />
@@ -183,6 +192,14 @@ export default ({route, navigation}) => {
           placeholder="Curso"
           keyboardType="default"
           returnKeyType="go"
+          leftIcon={
+            <Icon
+              type="ionicon"
+              name="rocket-outline"
+              size={22}
+              color={theme.colors.grey2}
+            />
+          }
           onChangeText={t => setCurso(t)}
           value={curso}
         />

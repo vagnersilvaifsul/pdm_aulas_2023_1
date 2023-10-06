@@ -5,7 +5,7 @@ import MyButtom from '../../components/MyButtom';
 import DeleteButton from '../../components/OutlineButton';
 import Loading from '../../components/Loading';
 import {EmpresaContext} from '../../context/EmpresaProvider';
-import {Input} from '@rneui/themed';
+import {useTheme, Input, Icon} from '@rneui/themed';
 
 const Container = styled.SafeAreaView`
   flex: 1;
@@ -26,6 +26,7 @@ export default ({route, navigation}) => {
   const [loading, setLoading] = useState(false);
   const {saveCompany, updateCompany, deleteCompany} =
     useContext(EmpresaContext);
+  const {theme} = useTheme();
 
   useEffect(() => {
     //console.log(route.params.company);
@@ -110,45 +111,77 @@ export default ({route, navigation}) => {
 
   return (
     <Scroll>
-    <Container>
-      <Input
-        placeholder="Nome da Empresa"
-        keyboardType="default"
-        returnKeyType="go"
-        onChangeText={t => setNome(t)}
-        value={nome}
-      />
-      <Input
-        placeholder="Tecnologias (separadas por , )"
-        keyboardType="default"
-        returnKeyType="go"
-        onChangeText={t => setTeconologias(t)}
-        value={tecnologias}
-      />
-      <Input
-        placeholder="Latitude"
-        editable={false}
-        keyboardType="default"
-        returnKeyType="go"
-        onChangeText={t => setTeconologias(t)}
-        value={latitude}
-      />
-      <Input
-        placeholder="Longitude"
-        editable={false}
-        keyboardType="default"
-        returnKeyType="go"
-        onChangeText={t => setTeconologias(t)}
-        value={longitude}
-      />
-      <MyButtom text="Salvar" onClick={salvar} />
-      {uid ? <DeleteButton texto="Excluir" onClick={excluir} /> : null}
-      <DeleteButton
-        texto="Obter Coordenadas no Mapa"
-        onClick={() => navigation.navigate('EmpresasMap', {onGoBack})}
-      />
-      <Loading visivel={loading} />
-    </Container>
+      <Container>
+        <Input
+          placeholder="Nome da Empresa"
+          keyboardType="default"
+          returnKeyType="go"
+          leftIcon={
+            <Icon
+              type="ionicon"
+              name="business-outline"
+              size={22}
+              color={theme.colors.grey2}
+            />
+          }
+          onChangeText={t => setNome(t)}
+          value={nome}
+        />
+        <Input
+          placeholder="Tecnologias (separadas por , )"
+          keyboardType="default"
+          returnKeyType="go"
+          leftIcon={
+            <Icon
+              type="ionicon"
+              name="list-outline"
+              size={22}
+              color={theme.colors.grey2}
+            />
+          }
+          onChangeText={t => setTeconologias(t)}
+          value={tecnologias}
+        />
+        <Input
+          placeholder="Latitude"
+          editable={false}
+          keyboardType="default"
+          returnKeyType="go"
+          leftIcon={
+            <Icon
+              type="material-community"
+              name="map-marker-check-outline"
+              size={22}
+              color={theme.colors.grey2}
+            />
+          }
+          onChangeText={t => setTeconologias(t)}
+          value={latitude}
+        />
+        <Input
+          placeholder="Longitude"
+          editable={false}
+          keyboardType="default"
+          returnKeyType="go"
+          leftIcon={
+            <Icon
+              type="material-community"
+              name="map-marker-check-outline"
+              size={22}
+              color={theme.colors.grey2}
+            />
+          }
+          onChangeText={t => setTeconologias(t)}
+          value={longitude}
+        />
+        <MyButtom text="Salvar" onClick={salvar} />
+        {uid ? <DeleteButton texto="Excluir" onClick={excluir} /> : null}
+        <DeleteButton
+          texto="Obter Coordenadas no Mapa"
+          onClick={() => navigation.navigate('EmpresasMap', {onGoBack})}
+        />
+        <Loading visivel={loading} />
+      </Container>
     </Scroll>
   );
 };

@@ -45,7 +45,7 @@ const theme = createTheme({
     ButtonGroup: {
       containerStyle: {
         marginBottom: 10,
-        borderColor: COLORS.grey,
+        borderColor: COLORS.primary,
         backgroundColor: COLORS.white,
       },
       textStyle: {color: COLORS.primary},
@@ -57,6 +57,11 @@ const theme = createTheme({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: COLORS.transparent,
+      },
+    },
+    Input: {
+      inputContainerStyle: {
+        borderBottomColor: COLORS.primary,
       },
     },
   },

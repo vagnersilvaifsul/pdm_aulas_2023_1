@@ -7,7 +7,7 @@ import Loading from '../../components/Loading';
 import {AuthUserContext} from '../../context/AuthUserProvider';
 import {useTheme, Input, Icon, Text, Image} from '@rneui/themed';
 
-const SignIn = ({navigation}) => {
+export default ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -129,16 +129,16 @@ const SignIn = ({navigation}) => {
             leftIcon={
               showPass ? (
                 <Icon
-                  name="form-textbox-password"
                   type="material-community"
+                  name="form-textbox-password"
                   size={22}
                   color={theme.colors.grey2}
                   onPress={() => setShowPass(false)}
                 />
               ) : (
                 <Icon
-                  name="form-textbox-password"
                   type="material-community"
+                  name="form-textbox-password"
                   size={22}
                   color={theme.colors.error}
                   onPress={() => setShowPass(true)}
@@ -174,5 +174,3 @@ const SignIn = ({navigation}) => {
     </SafeAreaView>
   );
 };
-
-export default SignIn;

@@ -3,8 +3,7 @@ import {Alert} from 'react-native';
 import MyButtom from '../../components/MyButtom';
 import {AuthUserContext} from '../../context/AuthUserProvider';
 import styled from 'styled-components/native';
-import {Input, Icon} from '@rneui/themed';
-import {useTheme} from '@rneui/themed';
+import {useTheme, Input, Icon} from '@rneui/themed';
 
 export const Body = styled.SafeAreaView`
   flex: 1;
@@ -13,7 +12,7 @@ export const Body = styled.SafeAreaView`
   margin-top: 40px;
 `;
 
-const ForgotPassWord = ({navigation}) => {
+export default ({navigation}) => {
   const [email, setEmail] = useState('');
   const {forgotPass} = useContext(AuthUserContext);
   const {theme} = useTheme();
@@ -58,4 +57,3 @@ const ForgotPassWord = ({navigation}) => {
     </Body>
   );
 };
-export default ForgotPassWord;
