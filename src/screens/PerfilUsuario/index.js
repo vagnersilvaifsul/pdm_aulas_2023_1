@@ -27,6 +27,7 @@ export default ({navigation}) => {
   const [oldPass, setOldPass] = useState('');
   const [newPass, setNewPass] = useState('');
   const [newPassConfirm, setNePassConfirm] = useState('');
+  const [showPass, setShowPass] = useState(true);
   const [loading, setLoading] = useState(false);
   const [urlDevice, setUrlDevice] = useState('');
   const {save, del, updatePassword} = useContext(UserContext);
@@ -278,49 +279,82 @@ export default ({navigation}) => {
         />
         <Input
           value={oldPass}
-          secureTextEntry={true}
+          secureTextEntry={showPass}
           placeholder="Senha antiga"
           keyboardType="default"
           returnKeyType="next"
           leftIcon={
-            <Icon
-              type="material-community"
-              name="form-textbox-password"
-              size={22}
-              color={theme.colors.grey2}
-            />
+            showPass ? (
+              <Icon
+                type="material-community"
+                name="form-textbox-password"
+                size={22}
+                color={theme.colors.grey2}
+                onPress={() => setShowPass(false)}
+              />
+            ) : (
+              <Icon
+                type="material-community"
+                name="form-textbox-password"
+                size={22}
+                color={theme.colors.error}
+                onPress={() => setShowPass(true)}
+              />
+            )
           }
           onChangeText={t => setOldPass(t)}
         />
         <Input
           value={newPass}
-          secureTextEntry={true}
+          secureTextEntry={showPass}
           placeholder="Nova senha (mín. 6 caracteres)"
           keyboardType="default"
           returnKeyType="next"
           leftIcon={
-            <Icon
-              type="material-community"
-              name="form-textbox-password"
-              size={22}
-              color={theme.colors.grey2}
-            />
+            showPass ? (
+              <Icon
+                type="material-community"
+                name="form-textbox-password"
+                size={22}
+                color={theme.colors.grey2}
+                onPress={() => setShowPass(false)}
+              />
+            ) : (
+              <Icon
+                type="material-community"
+                name="form-textbox-password"
+                size={22}
+                color={theme.colors.error}
+                onPress={() => setShowPass(true)}
+              />
+            )
           }
           onChangeText={t => setNewPass(t)}
         />
         <Input
           value={newPassConfirm}
-          secureTextEntry={true}
+          secureTextEntry={showPass}
           placeholder="Confirme a nova senha"
           keyboardType="default"
           returnKeyType="next"
           leftIcon={
-            <Icon
-              type="material-community"
-              name="form-textbox-password"
-              size={22}
-              color={theme.colors.grey2}
-            />
+            showPass ? (
+              <Icon
+                type="material-community"
+                name="form-textbox-password"
+                size={22}
+                color={theme.colors.grey2}
+                onPress={() => setShowPass(false)}
+              />
+            ) : (
+              <Icon
+                type="material-community"
+                name="form-textbox-password"
+                size={22}
+                color={theme.colors.error}
+                onPress={() => setShowPass(true)}
+              />
+            )
           }
           onChangeText={t => setNePassConfirm(t)}
         />
