@@ -3,10 +3,10 @@ import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
 import ImageResizer from '@bam.tech/react-native-image-resizer';
 
-export const EstudanteContext = createContext({});
+export const AlunoContext = createContext({});
 
-export const EstudanteProvider = ({children}) => {
-  const [estudantes, setEstudantes] = useState([]);
+export const AlunoProvider = ({children}) => {
+  const [alunos, setAlunos] = useState([]);
 
   useEffect(() => {
     const listener = firestore()
@@ -25,7 +25,7 @@ export const EstudanteProvider = ({children}) => {
               urlFoto: doc.data().urlFoto,
             });
           });
-          setEstudantes(data);
+          setAlunos(data);
         }
       });
 
@@ -106,8 +106,8 @@ export const EstudanteProvider = ({children}) => {
   };
 
   return (
-    <EstudanteContext.Provider value={{estudantes, save, del}}>
+    <AlunoContext.Provider value={{alunos, save, del}}>
       {children}
-    </EstudanteContext.Provider>
+    </AlunoContext.Provider>
   );
 };

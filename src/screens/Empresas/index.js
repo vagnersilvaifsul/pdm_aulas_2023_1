@@ -64,10 +64,7 @@ export default ({navigation}) => {
 
   return (
     <Container>
-      <SearchBar
-        text="Pesquise pelo nome da empresa"
-        setSearch={filterByName}
-      />
+      <SearchBar text="Quem você procura?" setSearch={filterByName} />
       <FlatList
         data={empresasTemp.length > 0 ? empresasTemp : empresas}
         renderItem={({item}) => (

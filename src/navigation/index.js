@@ -1,6 +1,6 @@
 import React from 'react';
 import {AuthUserProvider} from '../context/AuthUserProvider';
-import {EstudanteProvider} from '../context/EstudanteProvider';
+import {AlunoProvider} from '../context/AlunoProvider';
 import Navigator from './Navigator';
 import {ApiProvider} from '../context/ApiProvider';
 import {EmpresaProvider} from '../context/EmpresaProvider';
@@ -44,18 +44,25 @@ const theme = createTheme({
     },
     ButtonGroup: {
       containerStyle: {
-        marginBottom: 10,
+        height: 35,
+        marginTop: 20,
+        marginBottom: 20,
         borderColor: COLORS.primary,
         backgroundColor: COLORS.white,
       },
+      buttonStyle: {
+        height: 32,
+      },
       textStyle: {color: COLORS.primary},
+      innerBorderStyle: {color: COLORS.primary}
     },
     Image: {
       containerStyle: {
-        width: 150,
-        height: 200,
+        width: 120,
+        height: 120,
         justifyContent: 'center',
         alignItems: 'center',
+        borderRadius: 120 / 2,
         backgroundColor: COLORS.transparent,
       },
     },
@@ -74,11 +81,11 @@ export default function Providers() {
         <NotificationsProvider>
           <ApiProvider>
             <UserProvider>
-              <EstudanteProvider>
+              <AlunoProvider>
                 <EmpresaProvider>
                   <Navigator />
                 </EmpresaProvider>
-              </EstudanteProvider>
+              </AlunoProvider>
             </UserProvider>
           </ApiProvider>
         </NotificationsProvider>

@@ -3,10 +3,11 @@ import React, {useContext} from 'react';
 import {FlatList, Alert} from 'react-native';
 import {AuthUserContext} from '../../context/AuthUserProvider';
 import {CommonActions} from '@react-navigation/native';
-import Item from './Item';
+import {useTheme, ListItem, Icon} from '@rneui/themed';
 
-const Menu = ({navigation}) => {
+export default ({navigation}) => {
   const {signOut} = useContext(AuthUserContext);
+  const {theme} = useTheme();
 
   function processar(opcao) {
     switch (opcao) {
@@ -42,15 +43,20 @@ const Menu = ({navigation}) => {
         {key: 2, opcao: 'Sair', iconName: 'log-in-sharp'},
       ]}
       renderItem={({item}) => (
-        <Item
-          opcao={item.opcao}
-          icon={item.iconName}
-          onPress={() => processar(item.opcao)}
-        />
+        <ListItem bottomDivider onPress={() => processar(item.opcao)}>
+          <Icon
+            type="ionicon"
+            name={item.iconName}
+            color={theme.colors.primary}
+            size={20}
+          />
+          <ListItem.Content>
+            <ListItem.Title>{item.opcao}</ListItem.Title>
+          </ListItem.Content>
+        </ListItem>
       )}
       keyExtractor={item => item.key}
-      style={{marginTop: 10}}
+      style={{margin: 10, marginTop: 20}}
     />
   );
 };
-export default Menu;

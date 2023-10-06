@@ -1,6 +1,6 @@
 import React, {useContext, useState} from 'react';
 import styled from 'styled-components/native';
-import {EstudanteContext} from '../../context/EstudanteProvider';
+import {AlunoContext} from '../../context/AlunoProvider';
 import Item from './Item';
 import FloatButtonAdd from '../../components/FloatButtonAdd';
 import SearchBar from '../../components/SearchBar';
@@ -16,8 +16,8 @@ const FlatList = styled.FlatList`
 `;
 
 export default ({navigation}) => {
-  const {estudantes} = useContext(EstudanteContext);
-  const [estudantesTemp, setEstudantesTemp] = useState([]);
+  const {alunos} = useContext(AlunoContext);
+  const [alunosTemp, setAlunosTemp] = useState([]);
 
   const filterByName = text => {
     if (text !== '') {
@@ -29,28 +29,28 @@ export default ({navigation}) => {
       // });
 
       a.push(
-        ...estudantes.filter(e =>
+        ...alunos.filter(e =>
           e.nome.toLowerCase().includes(text.toLowerCase()),
         ),
       );
 
       if (a.length > 0) {
-        setEstudantesTemp(a);
+        setAlunosTemp(a);
       }
     } else {
-      setEstudantesTemp([]);
+      setAlunosTemp([]);
     }
   };
 
   const routeStudent = value => {
-    navigation.navigate('Estudante', {
+    navigation.navigate('Aluno', {
       value,
     });
   };
 
   return (
     <Container>
-      <SearchBar text="Pesquise pelo nome do aluno" setSearch={filterByName} />
+      <SearchBar text="Quem você procura?" setSearch={filterByName} />
       {/* {estudantesTemp.length > 0
         ? estudantesTemp.map((v, k) => (
             <Item item={v} onPress={() => routeStudent(v)} key={k} />
@@ -59,7 +59,7 @@ export default ({navigation}) => {
             <Item item={v} onPress={() => routeStudent(v)} key={k} />
           ))} */}
       <FlatList
-        data={estudantesTemp.length > 0 ? estudantesTemp : estudantes}
+        data={alunosTemp.length > 0 ? alunosTemp : alunos}
         renderItem={({item}) => (
           <Item item={item} onPress={() => routeStudent(item)} key={item.uid} />
         )}

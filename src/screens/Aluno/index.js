@@ -4,7 +4,7 @@ import styled from 'styled-components/native';
 import MyButton from '../../components/MyButtom';
 import Loading from '../../components/Loading';
 import DeleteButton from '../../components/OutlineButton';
-import {EstudanteContext} from '../../context/EstudanteProvider';
+import {AlunoContext} from '../../context/AlunoProvider';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {useTheme, Image, ButtonGroup, Input, Icon} from '@rneui/themed';
 
@@ -25,7 +25,7 @@ export default ({route, navigation}) => {
   const [loading, setLoading] = useState(false);
   const [urlFoto, setUrlFoto] = useState('');
   const [urlDevice, setUrlDevice] = useState('');
-  const {save, del} = useContext(EstudanteContext);
+  const {save, del} = useContext(AlunoContext);
   const {theme} = useTheme();
 
   useEffect(() => {

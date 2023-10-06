@@ -5,10 +5,10 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {StatusBar} from 'react-native';
 import SignIn from '../screens/SignIn';
-import Estudantes from '../screens/Estudantes';
+import Estudantes from '../screens/Alunos';
 import Preload from '../screens/Preload';
 import SignUp from '../screens/SignUp';
-import Estudante from '../screens/Estudante';
+import Aluno from '../screens/Aluno';
 import Empresas from '../screens/Empresas';
 import Empresa from '../screens/Empresa';
 import Cursos from '../screens/Cursos';
@@ -38,13 +38,13 @@ const AppStack = () => {
   const {theme} = useTheme();
   return (
     <Tab.Navigator
-      initialRouteName="Estudantes"
+      initialRouteName="Alunos"
       screenOptions={{
         headerShown: false,
       }}>
       <Tab.Screen
         component={Estudantes}
-        name="Estudantes"
+        name="Alunos"
         options={{
           tabBarLabel: 'Alunos',
           tabBarIcon: () => (
@@ -142,8 +142,8 @@ const Navigator = () => {
         <Stack.Screen component={AuthStack} name="AuthStack" />
         <Stack.Screen component={AppStack} name="AppStack" />
         <Stack.Screen
-          component={Estudante}
-          name="Estudante"
+          component={Aluno}
+          name="Aluno"
           options={{
             presentation: 'modal',
           }}

@@ -41,6 +41,7 @@ export default ({navigation}) => {
       alignSelf: 'flex-end',
       marginTop: 10,
       marginBottom: 10,
+      marginRight: 13,
     },
     divOuHr: {
       width: '100%',

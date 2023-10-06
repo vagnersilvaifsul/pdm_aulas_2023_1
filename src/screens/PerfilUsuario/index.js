@@ -240,7 +240,6 @@ export default ({navigation}) => {
                   uri: 'https://firebasestorage.googleapis.com/v0/b/pdm-aulas-797c8.appspot.com/o/images%2Fperson.png?alt=media&token=2be8523f-4c17-4a09-afbb-301a95a5ddfb&_gl=1*18jiiyk*_ga*MjA2NDY5NjU3NS4xNjg4MTI5NjYw*_ga_CW55HF8NVT*MTY5NjAyMzQxOS4zMS4xLjE2OTYwMjU4NzQuMzMuMC4w',
                 }
           }
-          containerStyle={styles.image}
           PlaceholderContent={<Loading />}
         />
         <ButtonGroup
@@ -333,14 +332,3 @@ export default ({navigation}) => {
     </Scroll>
   );
 };
-
-//estilo aplicado em componentes RNE
-const styles = StyleSheet.create({
-  image: {
-    width: 120,
-    height: 120,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 120 / 2,
-  },
-});
