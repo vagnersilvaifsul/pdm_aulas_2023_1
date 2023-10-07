@@ -29,12 +29,12 @@ export default ({route, navigation}) => {
   const {theme} = useTheme();
 
   useEffect(() => {
-    if (route.params) {
-      setNome(route.params.nome);
-      setTeconologias(route.params.tecnologias);
-      setUid(route.params.uid);
-      setLatitude(route.params.latitude);
-      setLongitude(route.params.longitude);
+    if (route.params.empresa) {
+      setNome(route.params.empresa.nome);
+      setTeconologias(route.params.empresa.tecnologias);
+      setUid(route.params.empresa.uid);
+      setLatitude(route.params.empresa.latitude);
+      setLongitude(route.params.empresa.longitude);
     }
   }, [route]);
 

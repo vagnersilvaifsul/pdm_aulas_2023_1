@@ -21,7 +21,7 @@ export default ({route, navigation}) => {
       ...StyleSheet.absoluteFillObject,
     },
   });
-
+  //TODO: repensar a feature "obter as coordenadas no map"
   return (
     <View style={styles.container}>
       <MapView
@@ -33,9 +33,9 @@ export default ({route, navigation}) => {
         followsUserLocation={true}
         onPress={e => {
           if (route.params !== undefined) {
-            route.params.latitude =
+            route.params.empresa.latitude =
               e.nativeEvent.coordinate.latitude.toString();
-            route.params.longitude =
+            route.params.empresa.longitude =
               e.nativeEvent.coordinate.longitude.toString();
             Alert.alert(
               'Show!',
@@ -53,9 +53,16 @@ export default ({route, navigation}) => {
                 {
                   text: 'Sim',
                   onPress: () => {
+                    let empresa = {
+                      nome: route.params.empresa.nome,
+                      tecnologias: route.params.empresa.tecnologias,
+                      latitude: route.params.empresa.latitude,
+                      longitude: route.params.empresa.longitude,
+                    };
+                    route.params = undefined;
                     navigation.navigate({
                       name: 'Empresa',
-                      params: route.params,
+                      params: {empresa},
                     });
                   },
                   style: 'cancel',
