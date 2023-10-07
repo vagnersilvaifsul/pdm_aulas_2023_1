@@ -54,7 +54,7 @@ const theme = createTheme({
         height: 32,
       },
       textStyle: {color: COLORS.primary},
-      innerBorderStyle: {color: COLORS.primary}
+      innerBorderStyle: {color: COLORS.primary},
     },
     Image: {
       containerStyle: {

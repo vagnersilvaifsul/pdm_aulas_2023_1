@@ -32,32 +32,37 @@ export default ({route, navigation}) => {
         showsUserLocation={true}
         followsUserLocation={true}
         onPress={e => {
-          route.params.onGoBack(
-            e.nativeEvent.coordinate.latitude,
-            e.nativeEvent.coordinate.longitude,
-          );
-          Alert.alert(
-            'Show!',
-            'Latitude= ' +
-              e.nativeEvent.coordinate.latitude +
-              '\nLongitude= ' +
-              e.nativeEvent.coordinate.longitude +
-              '\nConfirmar esse local?',
-            [
-              {
-                text: 'Não',
-                onPress: () => {},
-                style: 'cancel',
-              },
-              {
-                text: 'Sim',
-                onPress: () => {
-                  navigation.goBack();
+          if (route.params !== undefined) {
+            route.params.latitude =
+              e.nativeEvent.coordinate.latitude.toString();
+            route.params.longitude =
+              e.nativeEvent.coordinate.longitude.toString();
+            Alert.alert(
+              'Show!',
+              'Latitude= ' +
+                e.nativeEvent.coordinate.latitude +
+                '\nLongitude= ' +
+                e.nativeEvent.coordinate.longitude +
+                '\nConfirmar esse local?',
+              [
+                {
+                  text: 'Não',
+                  onPress: () => {},
+                  style: 'cancel',
                 },
-                style: 'cancel',
-              },
-            ],
-          );
+                {
+                  text: 'Sim',
+                  onPress: () => {
+                    navigation.navigate({
+                      name: 'Empresa',
+                      params: route.params,
+                    });
+                  },
+                  style: 'cancel',
+                },
+              ],
+            );
+          }
         }}
         initialRegion={{
           //região onde deve focar o mapa na inicialização

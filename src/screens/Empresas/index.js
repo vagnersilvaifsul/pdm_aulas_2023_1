@@ -48,7 +48,7 @@ export default ({navigation}) => {
     navigation.dispatch(
       CommonActions.navigate({
         name: 'Empresa',
-        params: {company: item},
+        params: item,
       }),
     );
   };
@@ -57,7 +57,12 @@ export default ({navigation}) => {
     navigation.dispatch(
       CommonActions.navigate({
         name: 'Empresa',
-        params: {company: null},
+        params: {
+          nome: '',
+          tecnologias: '',
+          latitude: '',
+          longitude: '',
+        },
       }),
     );
   };

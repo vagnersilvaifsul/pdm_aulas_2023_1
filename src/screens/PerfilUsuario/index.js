@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {Alert, ToastAndroid, StyleSheet} from 'react-native';
+import {Alert, ToastAndroid} from 'react-native';
 import styled from 'styled-components/native';
 import MyButtom from '../../components/MyButtom';
 import DeleteButton from '../../components/OutlineButton';

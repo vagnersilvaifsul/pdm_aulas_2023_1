@@ -2,7 +2,7 @@ import React, {useState, useEffect, useContext} from 'react';
 import {Alert, ToastAndroid} from 'react-native';
 import styled from 'styled-components/native';
 import MyButtom from '../../components/MyButtom';
-import DeleteButton from '../../components/OutlineButton';
+import OutlineButton from '../../components/OutlineButton';
 import Loading from '../../components/Loading';
 import {EmpresaContext} from '../../context/EmpresaProvider';
 import {useTheme, Input, Icon} from '@rneui/themed';
@@ -21,21 +21,20 @@ export default ({route, navigation}) => {
   const [nome, setNome] = useState('');
   const [tecnologias, setTeconologias] = useState('');
   const [uid, setUid] = useState('');
-  const [latitude, setLatitude] = useState('0');
-  const [longitude, setLongitude] = useState('0');
+  const [latitude, setLatitude] = useState('');
+  const [longitude, setLongitude] = useState('');
   const [loading, setLoading] = useState(false);
   const {saveCompany, updateCompany, deleteCompany} =
     useContext(EmpresaContext);
   const {theme} = useTheme();
 
   useEffect(() => {
-    //console.log(route.params.company);
-    if (route.params.company) {
-      setNome(route.params.company.nome);
-      setTeconologias(route.params.company.tecnologias);
-      setUid(route.params.company.uid);
-      setLatitude(route.params.company.latitude);
-      setLongitude(route.params.company.longitude);
+    if (route.params) {
+      setNome(route.params.nome);
+      setTeconologias(route.params.tecnologias);
+      setUid(route.params.uid);
+      setLatitude(route.params.latitude);
+      setLongitude(route.params.longitude);
     }
   }, [route]);
 
@@ -104,11 +103,6 @@ export default ({route, navigation}) => {
     );
   };
 
-  function onGoBack(lat, long) {
-    setLatitude(lat.toString());
-    setLongitude(long.toString());
-  }
-
   return (
     <Scroll>
       <Container>
@@ -175,10 +169,10 @@ export default ({route, navigation}) => {
           value={longitude}
         />
         <MyButtom text="Salvar" onClick={salvar} />
-        {uid ? <DeleteButton texto="Excluir" onClick={excluir} /> : null}
-        <DeleteButton
+        {uid ? <OutlineButton texto="Excluir" onClick={excluir} /> : null}
+        <OutlineButton
           texto="Obter Coordenadas no Mapa"
-          onClick={() => navigation.navigate('EmpresasMap', {onGoBack})}
+          onClick={() => navigation.navigate('EmpresasMap', route.params)}
         />
         <Loading visivel={loading} />
       </Container>
