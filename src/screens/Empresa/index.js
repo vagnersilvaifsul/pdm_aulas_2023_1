@@ -30,9 +30,9 @@ export default ({route, navigation}) => {
 
   useEffect(() => {
     if (route.params.empresa) {
+      setUid(route.params.empresa.uid);
       setNome(route.params.empresa.nome);
       setTeconologias(route.params.empresa.tecnologias);
-      setUid(route.params.empresa.uid);
       setLatitude(route.params.empresa.latitude);
       setLongitude(route.params.empresa.longitude);
     }
@@ -172,7 +172,17 @@ export default ({route, navigation}) => {
         {uid ? <OutlineButton texto="Excluir" onClick={excluir} /> : null}
         <OutlineButton
           texto="Obter Coordenadas no Mapa"
-          onClick={() => navigation.navigate('EmpresasMap', route.params)}
+          onClick={() =>
+            navigation.navigate('EmpresasMap', {
+              empresa: {
+                uid,
+                nome,
+                tecnologias,
+                latitude,
+                longitude,
+              },
+            })
+          }
         />
         <Loading visivel={loading} />
       </Container>

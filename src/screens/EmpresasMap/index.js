@@ -47,7 +47,9 @@ export default ({route, navigation}) => {
               [
                 {
                   text: 'Não',
-                  onPress: () => {},
+                  onPress: () => {
+                    route.params = undefined;
+                  },
                   style: 'cancel',
                 },
                 {
