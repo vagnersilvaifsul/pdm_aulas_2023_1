@@ -27,6 +27,7 @@ const theme = createTheme({
     accentSecundary: COLORS.accentSecundary, //esta cor extende a paleta do rneui
     background: COLORS.black,
     error: COLORS.error,
+    loading: COLORS.primaryDark,
     transparent: COLORS.transparent, //esta cor extende a paleta do rneui
   },
   mode: 'light',

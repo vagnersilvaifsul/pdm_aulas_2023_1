@@ -6,7 +6,14 @@ export default ({visivel = false}) => {
   return (
     <Dialog isVisible={visivel}>
       <Dialog.Title title="Aguarde..." />
-      <Dialog.Loading loadingStyle={{color: theme.colors.primary}} />
+      <Dialog.Loading
+        loadingProps={{
+          color:
+            theme.mode === 'light'
+              ? theme.colors.primary
+              : theme.colors.loading,
+        }}
+      />
     </Dialog>
   );
 };
