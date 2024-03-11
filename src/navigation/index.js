@@ -68,7 +68,7 @@ const theme = createTheme({
     },
     Input: {
       inputContainerStyle: {
-        borderBottomColor: COLORS.primary,
+        borderBottomColor: COLORS.grey,
       },
     },
   },
