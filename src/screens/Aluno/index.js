@@ -172,6 +172,19 @@ export default ({route, navigation}) => {
         <ButtonGroup
           buttons={['Buscar na Galeria', 'Tira Foto']}
           onPress={v => buscarImagemNoDevice(v)}
+          containerStyle={{
+            borderColor:
+              theme.mode === 'light'
+                ? theme.colors.primary
+                : theme.colors.black,
+            backgroundColor: theme.colors.white,
+          }}
+          textStyle={{
+            color:
+              theme.mode === 'light'
+                ? theme.colors.primary
+                : theme.colors.black,
+          }}
         />
         <Input
           placeholder="Nome"

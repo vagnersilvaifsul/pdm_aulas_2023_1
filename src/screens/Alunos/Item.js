@@ -11,11 +11,13 @@ export default ({item, onPress}) => {
       alignContent: 'center',
       alignItems: 'center',
       borderRadius: 10,
-      borderColor: theme.colors.primaryDark,
+      borderColor:
+        theme.mode === 'light' ? theme.colors.primaryDark : theme.colors.black,
       backgroundColor: theme.colors.background,
     },
     title: {
-      color: theme.colors.primaryDark,
+      color:
+        theme.mode === 'light' ? theme.colors.primaryDark : theme.colors.black,
     },
     divider: {
       width: 260,
@@ -32,7 +34,8 @@ export default ({item, onPress}) => {
     },
     nome: {
       textAlign: 'center',
-      color: theme.colors.primaryDark,
+      color:
+        theme.mode === 'light' ? theme.colors.primaryDark : theme.colors.black,
       fontSize: 18,
       fontWeight: 'bold',
     },
@@ -41,7 +44,7 @@ export default ({item, onPress}) => {
   return (
     <Card containerStyle={styles.card}>
       <Card.Title style={styles.title}>{item.curso}</Card.Title>
-      <Card.Divider color={theme.colors.primary} style={styles.divider} />
+      <Card.Divider color={theme.colors.black} style={styles.divider} />
       <View style={styles.div_estudante}>
         <Image containerStyle={styles.foto} source={{uri: item.urlFoto}} />
         <Text style={styles.nome}>{item.nome}</Text>

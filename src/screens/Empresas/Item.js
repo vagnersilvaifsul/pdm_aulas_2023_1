@@ -11,11 +11,13 @@ export default ({item, onPress}) => {
       alignContent: 'center',
       alignItems: 'center',
       borderRadius: 10,
-      borderColor: theme.colors.primaryDark,
+      borderColor:
+        theme.mode === 'light' ? theme.colors.primaryDark : theme.colors.black,
       backgroundColor: theme.colors.background,
     },
     title: {
-      color: theme.colors.primaryDark,
+      color:
+        theme.mode === 'light' ? theme.colors.primaryDark : theme.colors.black,
       fontSize: 20,
       fontWeight: 'bold',
     },

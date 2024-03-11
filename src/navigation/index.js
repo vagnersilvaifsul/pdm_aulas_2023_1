@@ -18,12 +18,18 @@ const theme = createTheme({
     background: COLORS.white,
     error: COLORS.errror,
     transparent: COLORS.transparent,
+    white: COLORS.white,
   },
   darkColors: {
     primary: COLORS.primary,
+    primaryDark: COLORS.black,
     secondary: COLORS.accent,
+    accentSecundary: COLORS.accentSecundary,
+    background: COLORS.black,
+    error: COLORS.errror,
+    transparent: COLORS.transparent,
   },
-  mode: 'light',
+  mode: 'dark',
   components: {
     Button: {
       containerStyle: {
