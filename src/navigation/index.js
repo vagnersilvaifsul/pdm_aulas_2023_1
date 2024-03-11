@@ -16,20 +16,20 @@ const theme = createTheme({
     secondary: COLORS.accent,
     accentSecundary: COLORS.accentSecundary,
     background: COLORS.white,
-    error: COLORS.errror,
+    error: COLORS.error,
     transparent: COLORS.transparent,
     white: COLORS.white,
   },
   darkColors: {
-    primary: COLORS.primary,
+    primary: COLORS.white,
     primaryDark: COLORS.black,
     secondary: COLORS.accent,
     accentSecundary: COLORS.accentSecundary,
     background: COLORS.black,
-    error: COLORS.errror,
+    error: COLORS.error,
     transparent: COLORS.transparent,
   },
-  mode: 'dark',
+  mode: 'light',
   components: {
     Button: {
       containerStyle: {
