@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {useContext, useState} from 'react';
 import {ScrollView, View, StyleSheet, Alert} from 'react-native';
 import MyButtom from '../../components/MyButtom';
