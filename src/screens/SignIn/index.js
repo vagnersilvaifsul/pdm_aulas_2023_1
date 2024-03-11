@@ -30,11 +30,6 @@ export default ({navigation}) => {
       alignItems: 'center',
       marginTop: 20,
     },
-    image: {
-      width: 150,
-      height: 150,
-      margin: 5,
-    },
     textEsqueceuSenha: {
       fontSize: 15,
       color: theme.colors.accentSecundary,
@@ -104,7 +99,13 @@ export default ({navigation}) => {
       <ScrollView>
         <View style={styles.divSuperior}>
           <Image
-            style={styles.image}
+            containerStyle={{
+              width: 300,
+              height: 300,
+              borderRadius: 300 / 2,
+              marginBottom: 40,
+            }}
+            style={{width: 300, height: 300}}
             source={require('../../assets/images/logo.png')}
             accessibilityLabel="logo do app"
           />
