@@ -12,22 +12,22 @@ import {COLORS} from '../assets/colors';
 const theme = createTheme({
   lightColors: {
     primary: COLORS.primary,
-    primaryDark: COLORS.primaryDark,
+    primaryDark: COLORS.primaryDark, //esta cor extende a paleta do rneui
     secondary: COLORS.accent,
-    accentSecundary: COLORS.accentSecundary,
+    accentSecundary: COLORS.accentSecundary, //esta cor extende a paleta do rneui
     background: COLORS.white,
-    error: COLORS.error,
-    transparent: COLORS.transparent,
     white: COLORS.white,
+    error: COLORS.error,
+    transparent: COLORS.transparent, //esta cor extende a paleta do rneui
   },
   darkColors: {
     primary: COLORS.white,
-    primaryDark: COLORS.black,
+    primaryDark: COLORS.black, //esta cor extende a paleta do rneui
     secondary: COLORS.accent,
-    accentSecundary: COLORS.accentSecundary,
+    accentSecundary: COLORS.accentSecundary, //esta cor extende a paleta do rneui
     background: COLORS.black,
     error: COLORS.error,
-    transparent: COLORS.transparent,
+    transparent: COLORS.transparent, //esta cor extende a paleta do rneui
   },
   mode: 'light',
   components: {
