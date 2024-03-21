@@ -1,8 +1,21 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useContext, useEffect} from 'react';
-import {Container, Image} from './styles';
 import {CommonActions} from '@react-navigation/native';
 import {AuthUserContext} from '../../context/AuthUserProvider';
+import styled from 'styled-components/native';
+import {COLORS} from '../../assets/colors';
+
+export const Container = styled.SafeAreaView`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  background-color: ${COLORS.primary};
+`;
+
+export const Image = styled.Image`
+  width: 150px;
+  height: 150px;
+`;
 
 const Preload = ({navigation}) => {
   const {retrieveUserSession, signIn} = useContext(AuthUserContext);
