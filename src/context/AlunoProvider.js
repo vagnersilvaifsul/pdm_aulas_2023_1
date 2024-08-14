@@ -34,31 +34,31 @@ export const AlunoProvider = ({children}) => {
     };
   }, []);
 
-  const save = async (estudante, urlDevice) => {
+  const save = async (aluno, urlDevice) => {
     try {
       if (urlDevice !== '') {
-        estudante.urlFoto = await sendImageToStorage(urlDevice, estudante);
-        if (!estudante.urlFoto) {
+        aluno.urlFoto = await sendImageToStorage(urlDevice, aluno);
+        if (!aluno.urlFoto) {
           return false; //não deixa salvar ou atualizar se não realizar todos os passpos para enviar a imagem para o storage
         }
       }
-      await firestore().collection('estudantes').doc(estudante.uid).set(
+      await firestore().collection('estudantes').doc(aluno.uid).set(
         {
-          nome: estudante.nome,
-          curso: estudante.curso,
-          urlFoto: estudante.urlFoto,
+          nome: aluno.nome,
+          curso: aluno.curso,
+          urlFoto: aluno.urlFoto,
         },
         {merge: true},
       );
       return true;
     } catch (e) {
-      console.error('EstudanteProvider, salvar: ' + e);
+      console.error('alunoProvider, salvar: ' + e);
       return false;
     }
   };
 
   //urlDevice: qual imagem deve ser enviada via upload
-  async function sendImageToStorage(urlDevice, estudante) {
+  async function sendImageToStorage(urlDevice, aluno) {
     //1. Redimensiona e compacta a imagem
     let imageRedimencionada = await ImageResizer.createResizedImage(
       urlDevice,
@@ -68,7 +68,7 @@ export const AlunoProvider = ({children}) => {
       80,
     );
     //2. e prepara o path onde ela deve ser salva no storage
-    const pathToStorage = `images/${estudante.curso}/${estudante.uid}/foto.png`;
+    const pathToStorage = `images/${aluno.curso}/${aluno.uid}/foto.png`;
 
     //3. Envia para o storage
     let url = ''; //local onde a imagem será salva no Storage
@@ -88,7 +88,7 @@ export const AlunoProvider = ({children}) => {
     });
     //5. Pode dar zebra, então pega a exceção
     task.catch(e => {
-      console.error('EstudanteProvider, sendImageToStorage: ' + e);
+      console.error('alunoProvider, sendImageToStorage: ' + e);
       url = null;
     });
     return url;
@@ -100,7 +100,7 @@ export const AlunoProvider = ({children}) => {
       await storage().ref(path).delete();
       return true;
     } catch (e) {
-      console.error('EstudanteProvider, del: ', e);
+      console.error('alunoProvider, del: ', e);
       return false;
     }
   };

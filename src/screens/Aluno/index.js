@@ -97,7 +97,7 @@ export default ({route, navigation}) => {
   const buscaNaGaleria = () => {
     const options = {
       storageOptions: {
-        title: 'Selecionar  uma imagem',
+        title: 'Selecionar uma imagem',
         skipBackup: true,
         path: 'images',
         mediaType: 'photo',
