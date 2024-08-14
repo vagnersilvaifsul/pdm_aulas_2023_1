@@ -82,7 +82,7 @@ export const AlunoProvider = ({children}) => {
     });
 
     //4. Busca a URL gerada pelo Storage
-    await task.then(async () => {
+    task.then(async () => {
       //se a task finalizar com sucesso, busca a url
       url = await storage().ref(pathToStorage).getDownloadURL();
     });
