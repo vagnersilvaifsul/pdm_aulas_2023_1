@@ -42,40 +42,33 @@ export default ({navigation}) => {
 
   function salvar() {
     if (oldPass === '' && newPass === '' && newPassConfirm === '') {
-      Alert.alert(
-        'Fique Esperto!',
-        'Você tem certeza que deseja alterar estes dados?',
-        [
-          {
-            text: 'Não',
-            onPress: () => {},
-            style: 'cancel',
-          },
-          {
-            text: 'Sim',
-            onPress: async () => {
-              setLoading(true);
-              /*
+      Alert.alert('Fique Esperto!', 'Você tem certeza que deseja alterar estes dados?', [
+        {
+          text: 'Não',
+          onPress: () => {},
+          style: 'cancel',
+        },
+        {
+          text: 'Sim',
+          onPress: async () => {
+            setLoading(true);
+            /*
                 Para evitar que dados sensíveis sejam enviados para
                 o Firestore, um novo objeto é criado.
               */
-              let localUser = {};
-              localUser.uid = user.uid;
-              localUser.nome = nome;
-              if (await save(localUser, urlDevice)) {
-                ToastAndroid.show(
-                  'Show! Você salvou os dados com sucesso.',
-                  ToastAndroid.LONG,
-                );
-              } else {
-                ToastAndroid.show('Ops! Erro ao salvar.', ToastAndroid.LONG);
-              }
-              setLoading(false);
-              navigation.goBack();
-            },
+            let localUser = {};
+            localUser.uid = user.uid;
+            localUser.nome = nome;
+            if (await save(localUser, urlDevice)) {
+              ToastAndroid.show('Show! Você salvou os dados com sucesso.', ToastAndroid.LONG);
+            } else {
+              ToastAndroid.show('Ops! Erro ao salvar.', ToastAndroid.LONG);
+            }
+            setLoading(false);
+            navigation.goBack();
           },
-        ],
-      );
+        },
+      ]);
     }
   }
 
@@ -145,10 +138,7 @@ export default ({navigation}) => {
             text: 'Sim',
             onPress: async () => {
               if (await updatePassword(newPass)) {
-                ToastAndroid.show(
-                  'Show! Você alterou sua senha com sucesso.',
-                  ToastAndroid.LONG,
-                );
+                ToastAndroid.show('Show! Você alterou sua senha com sucesso.', ToastAndroid.LONG);
                 navigation.goBack();
               } else {
                 ToastAndroid.show(
@@ -253,12 +243,7 @@ export default ({navigation}) => {
           keyboardType="default"
           returnKeyType="next"
           leftIcon={
-            <Icon
-              type="ionicon"
-              name="person-outline"
-              size={22}
-              color={theme.colors.grey2}
-            />
+            <Icon type="ionicon" name="person-outline" size={22} color={theme.colors.grey2} />
           }
           onChangeText={t => setNome(t)}
         />

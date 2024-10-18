@@ -23,10 +23,7 @@ const Preload = ({navigation}) => {
   const entrar = async () => {
     const userSession = await retrieveUserSession();
 
-    if (
-      userSession &&
-      (await signIn(userSession.email, userSession.pass)) === 'ok'
-    ) {
+    if (userSession && (await signIn(userSession.email, userSession.pass)) === 'ok') {
       navigation.dispatch(
         CommonActions.reset({
           index: 0,

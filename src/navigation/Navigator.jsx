@@ -51,11 +51,7 @@ const AppStack = () => {
             <Icon
               type="ionicon"
               name="people"
-              color={
-                theme.mode === 'light'
-                  ? theme.colors.primary
-                  : theme.colors.black
-              }
+              color={theme.mode === 'light' ? theme.colors.primary : theme.colors.black}
               size={20}
             />
           ),
@@ -70,11 +66,7 @@ const AppStack = () => {
             <Icon
               type="ionicon"
               name="business"
-              color={
-                theme.mode === 'light'
-                  ? theme.colors.primary
-                  : theme.colors.black
-              }
+              color={theme.mode === 'light' ? theme.colors.primary : theme.colors.black}
               size={20}
             />
           ),
@@ -89,11 +81,7 @@ const AppStack = () => {
             <Icon
               type="ionicon"
               name="map-sharp"
-              color={
-                theme.mode === 'light'
-                  ? theme.colors.primary
-                  : theme.colors.black
-              }
+              color={theme.mode === 'light' ? theme.colors.primary : theme.colors.black}
               size={20}
             />
           ),
@@ -108,11 +96,7 @@ const AppStack = () => {
             <Icon
               type="ionicon"
               name="rocket"
-              color={
-                theme.mode === 'light'
-                  ? theme.colors.primary
-                  : theme.colors.black
-              }
+              color={theme.mode === 'light' ? theme.colors.primary : theme.colors.black}
               size={20}
             />
           ),
@@ -127,11 +111,7 @@ const AppStack = () => {
             <Icon
               type="ionicon"
               name="list"
-              color={
-                theme.mode === 'light'
-                  ? theme.colors.primary
-                  : theme.colors.black
-              }
+              color={theme.mode === 'light' ? theme.colors.primary : theme.colors.black}
               size={20}
             />
           ),

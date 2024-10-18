@@ -64,34 +64,27 @@ export default ({route, navigation}) => {
   };
 
   const excluir = async () => {
-    Alert.alert(
-      'Opa! Fique esperto.',
-      'Você tem certeza que deseja excluir o aluno?',
-      [
-        {
-          text: 'Não',
-          onPress: () => {},
-          style: 'cancel',
+    Alert.alert('Opa! Fique esperto.', 'Você tem certeza que deseja excluir o aluno?', [
+      {
+        text: 'Não',
+        onPress: () => {},
+        style: 'cancel',
+      },
+      {
+        text: 'Sim',
+        onPress: async () => {
+          setLoading(true);
+          const pathStorageToDelete = `images/${curso}/${nome}/foto.png`;
+          if (await del(uid, pathStorageToDelete)) {
+            ToastAndroid.show('Ordem dada é ordem cumprida', ToastAndroid.LONG);
+          } else {
+            ToastAndroid.show('Deu problema ao excluir.', ToastAndroid.SHORT);
+          }
+          setLoading(false);
+          navigation.goBack();
         },
-        {
-          text: 'Sim',
-          onPress: async () => {
-            setLoading(true);
-            const pathStorageToDelete = `images/${curso}/${nome}/foto.png`;
-            if (await del(uid, pathStorageToDelete)) {
-              ToastAndroid.show(
-                'Ordem dada é ordem cumprida',
-                ToastAndroid.LONG,
-              );
-            } else {
-              ToastAndroid.show('Deu problema ao excluir.', ToastAndroid.SHORT);
-            }
-            setLoading(false);
-            navigation.goBack();
-          },
-        },
-      ],
-    );
+      },
+    ]);
   };
 
   const buscaNaGaleria = () => {
@@ -173,17 +166,11 @@ export default ({route, navigation}) => {
           buttons={['Buscar na Galeria', 'Tira Foto']}
           onPress={v => buscarImagemNoDevice(v)}
           containerStyle={{
-            borderColor:
-              theme.mode === 'light'
-                ? theme.colors.primary
-                : theme.colors.black,
+            borderColor: theme.mode === 'light' ? theme.colors.primary : theme.colors.black,
             backgroundColor: theme.colors.white,
           }}
           textStyle={{
-            color:
-              theme.mode === 'light'
-                ? theme.colors.primary
-                : theme.colors.black,
+            color: theme.mode === 'light' ? theme.colors.primary : theme.colors.black,
           }}
         />
         <Input
@@ -191,12 +178,7 @@ export default ({route, navigation}) => {
           keyboardType="default"
           returnKeyType="go"
           leftIcon={
-            <Icon
-              type="ionicon"
-              name="person-outline"
-              size={22}
-              color={theme.colors.grey2}
-            />
+            <Icon type="ionicon" name="person-outline" size={22} color={theme.colors.grey2} />
           }
           onChangeText={t => setNome(t)}
           value={nome}
@@ -206,12 +188,7 @@ export default ({route, navigation}) => {
           keyboardType="default"
           returnKeyType="go"
           leftIcon={
-            <Icon
-              type="ionicon"
-              name="rocket-outline"
-              size={22}
-              color={theme.colors.grey2}
-            />
+            <Icon type="ionicon" name="rocket-outline" size={22} color={theme.colors.grey2} />
           }
           onChangeText={t => setCurso(t)}
           value={curso}

@@ -165,9 +165,7 @@ export default ({navigation}) => {
           </View>
           <View style={styles.divCadastrarSe}>
             <Text>Não tem uma conta?</Text>
-            <Text
-              style={styles.textCadastrarSe}
-              onPress={() => navigation.navigate('SignUp')}>
+            <Text style={styles.textCadastrarSe} onPress={() => navigation.navigate('SignUp')}>
               Cadastre-se
             </Text>
           </View>

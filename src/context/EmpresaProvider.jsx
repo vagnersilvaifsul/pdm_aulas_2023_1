@@ -25,9 +25,7 @@ export const EmpresaProvider = ({children}) => {
       //console.log(response.data.documents);
       let data = [];
       response.data.documents.map(d => {
-        let k = d.name.split(
-          'projects/pdm-aulas-797c8/databases/(default)/documents/empresas/',
-        );
+        let k = d.name.split('projects/pdm-aulas-797c8/databases/(default)/documents/empresas/');
         //console.log(k[1]);
         // console.log(d.fields.latitude.stringValue);
         // console.log(d.fields.longitude.stringValue);

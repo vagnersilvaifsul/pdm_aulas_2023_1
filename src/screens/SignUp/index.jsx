@@ -37,9 +37,7 @@ export default ({navigation}) => {
           setLoading(false);
           Alert.alert(
             'Show!',
-            'Foi enviado um email para:\n' +
-              user.email +
-              '\nFaça a verificação.',
+            'Foi enviado um email para:\n' + user.email + '\nFaça a verificação.',
           );
           navigation.goBack();
         } else {

@@ -1,11 +1,11 @@
-import React, {useState, useEffect, useContext} from 'react';
+import {Icon, Input, useTheme} from '@rneui/themed';
+import React, {useContext, useEffect, useState} from 'react';
 import {Alert, ToastAndroid} from 'react-native';
 import styled from 'styled-components/native';
+import Loading from '../../components/Loading';
 import MyButtom from '../../components/MyButtom';
 import OutlineButton from '../../components/OutlineButton';
-import Loading from '../../components/Loading';
 import {EmpresaContext} from '../../context/EmpresaProvider';
-import {useTheme, Input, Icon} from '@rneui/themed';
 
 const Container = styled.SafeAreaView`
   flex: 1;
@@ -24,8 +24,7 @@ export default ({route, navigation}) => {
   const [latitude, setLatitude] = useState('');
   const [longitude, setLongitude] = useState('');
   const [loading, setLoading] = useState(false);
-  const {saveCompany, updateCompany, deleteCompany} =
-    useContext(EmpresaContext);
+  const {saveCompany, updateCompany, deleteCompany} = useContext(EmpresaContext);
   const {theme} = useTheme();
 
   useEffect(() => {
@@ -49,19 +48,13 @@ export default ({route, navigation}) => {
       setLoading(true);
       if (uid) {
         if (await updateCompany(company)) {
-          ToastAndroid.show(
-            'Show! Você alterou com sucesso.',
-            ToastAndroid.LONG,
-          );
+          ToastAndroid.show('Show! Você alterou com sucesso.', ToastAndroid.LONG);
         } else {
           ToastAndroid.show('Ops! Erro ao alterar.', ToastAndroid.LONG);
         }
       } else {
         if (await saveCompany(company)) {
-          ToastAndroid.show(
-            'Show! Você inluiu com sucesso.',
-            ToastAndroid.LONG,
-          );
+          ToastAndroid.show('Show! Você inluiu com sucesso.', ToastAndroid.LONG);
         } else {
           ToastAndroid.show('Ops! Erro ao alterar.', ToastAndroid.LONG);
         }
@@ -74,33 +67,26 @@ export default ({route, navigation}) => {
   };
 
   const excluir = async () => {
-    Alert.alert(
-      'Fique Esperto!',
-      'Você tem certeza que deseja excluir o curso?',
-      [
-        {
-          text: 'Não',
-          onPress: () => {},
-          style: 'cancel',
+    Alert.alert('Fique Esperto!', 'Você tem certeza que deseja excluir o curso?', [
+      {
+        text: 'Não',
+        onPress: () => {},
+        style: 'cancel',
+      },
+      {
+        text: 'Sim',
+        onPress: async () => {
+          setLoading(true);
+          if (await deleteCompany(uid)) {
+            ToastAndroid.show('Show! Você excluiu com sucesso.', ToastAndroid.LONG);
+          } else {
+            ToastAndroid.show('Ops! Erro ao excluir.', ToastAndroid.LONG);
+          }
+          setLoading(false);
+          navigation.goBack();
         },
-        {
-          text: 'Sim',
-          onPress: async () => {
-            setLoading(true);
-            if (await deleteCompany(uid)) {
-              ToastAndroid.show(
-                'Show! Você excluiu com sucesso.',
-                ToastAndroid.LONG,
-              );
-            } else {
-              ToastAndroid.show('Ops! Erro ao excluir.', ToastAndroid.LONG);
-            }
-            setLoading(false);
-            navigation.goBack();
-          },
-        },
-      ],
-    );
+      },
+    ]);
   };
 
   return (
@@ -111,12 +97,7 @@ export default ({route, navigation}) => {
           keyboardType="default"
           returnKeyType="go"
           leftIcon={
-            <Icon
-              type="ionicon"
-              name="business-outline"
-              size={22}
-              color={theme.colors.grey2}
-            />
+            <Icon type="ionicon" name="business-outline" size={22} color={theme.colors.grey2} />
           }
           onChangeText={t => setNome(t)}
           value={nome}
@@ -126,12 +107,7 @@ export default ({route, navigation}) => {
           keyboardType="default"
           returnKeyType="go"
           leftIcon={
-            <Icon
-              type="ionicon"
-              name="list-outline"
-              size={22}
-              color={theme.colors.grey2}
-            />
+            <Icon type="ionicon" name="list-outline" size={22} color={theme.colors.grey2} />
           }
           onChangeText={t => setTeconologias(t)}
           value={tecnologias}

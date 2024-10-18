@@ -44,12 +44,7 @@ export default ({navigation}) => {
       ]}
       renderItem={({item}) => (
         <ListItem bottomDivider onPress={() => processar(item.opcao)}>
-          <Icon
-            type="ionicon"
-            name={item.iconName}
-            color={theme.colors.primary}
-            size={20}
-          />
+          <Icon type="ionicon" name={item.iconName} color={theme.colors.primary} size={20} />
           <ListItem.Content>
             <ListItem.Title>{item.opcao}</ListItem.Title>
           </ListItem.Content>

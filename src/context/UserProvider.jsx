@@ -36,13 +36,7 @@ export const UserProvider = ({children}) => {
   //urlDevice: qual imagem deve ser enviada via upload
   async function sendImageToStorage(urlDevice, user) {
     //1. Redimensiona e compacta a imagem
-    let imageRedimencionada = await ImageResizer.createResizedImage(
-      urlDevice,
-      150,
-      200,
-      'PNG',
-      80,
-    );
+    let imageRedimencionada = await ImageResizer.createResizedImage(urlDevice, 150, 200, 'PNG', 80);
     //2. e prepara o path onde ela deve ser salva no storage
     const pathToStorage = `images/users/${user.uid}/foto.png`;
 
@@ -92,8 +86,6 @@ export const UserProvider = ({children}) => {
   }
 
   return (
-    <UserContext.Provider value={{save, del, updatePassword}}>
-      {children}
-    </UserContext.Provider>
+    <UserContext.Provider value={{save, del, updatePassword}}>{children}</UserContext.Provider>
   );
 };

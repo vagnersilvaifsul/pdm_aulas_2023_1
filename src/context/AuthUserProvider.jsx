@@ -41,10 +41,7 @@ export const AuthUserProvider = ({children}) => {
     try {
       await auth().createUserWithEmailAndPassword(localUser.email, pass);
       await auth().currentUser.sendEmailVerification();
-      await firestore()
-        .collection('users')
-        .doc(auth().currentUser.uid)
-        .set(localUser);
+      await firestore().collection('users').doc(auth().currentUser.uid).set(localUser);
       return 'ok';
     } catch (e) {
       return launchServerMessageErro(e);
@@ -93,10 +90,7 @@ export const AuthUserProvider = ({children}) => {
   //busca os detalhes do user no nó users e o armazena no state user
   async function getUser(pass) {
     try {
-      let doc = await firestore()
-        .collection('users')
-        .doc(auth().currentUser.uid)
-        .get();
+      let doc = await firestore().collection('users').doc(auth().currentUser.uid).get();
       if (doc.exists) {
         //console.log('Document data:', doc.data());
         doc.data().uid = auth().currentUser.uid;

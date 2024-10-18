@@ -28,11 +28,7 @@ export default ({navigation}) => {
       //   }
       // });
 
-      a.push(
-        ...alunos.filter(e =>
-          e.nome.toLowerCase().includes(text.toLowerCase()),
-        ),
-      );
+      a.push(...alunos.filter(e => e.nome.toLowerCase().includes(text.toLowerCase())));
 
       if (a.length > 0) {
         setAlunosTemp(a);

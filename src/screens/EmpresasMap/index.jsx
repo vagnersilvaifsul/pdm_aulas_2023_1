@@ -33,10 +33,8 @@ export default ({route, navigation}) => {
         followsUserLocation={true}
         onPress={e => {
           if (route.params !== undefined) {
-            route.params.empresa.latitude =
-              e.nativeEvent.coordinate.latitude.toString();
-            route.params.empresa.longitude =
-              e.nativeEvent.coordinate.longitude.toString();
+            route.params.empresa.latitude = e.nativeEvent.coordinate.latitude.toString();
+            route.params.empresa.longitude = e.nativeEvent.coordinate.longitude.toString();
             Alert.alert(
               'Show!',
               'Latitude= ' +
@@ -94,11 +92,7 @@ export default ({route, navigation}) => {
               <Icon
                 type="ionicon"
                 name="business"
-                color={
-                  mapType === 'standard'
-                    ? theme.colors.primary
-                    : theme.colors.white
-                }
+                color={mapType === 'standard' ? theme.colors.primary : theme.colors.white}
                 size={35}
               />
             </Marker>
@@ -107,24 +101,18 @@ export default ({route, navigation}) => {
       </MapView>
       <Button
         title={mapType === 'standard' ? 'Padrão' : 'Satélite'}
-        onPress={() =>
-          mapType === 'standard'
-            ? setMapType('satellite')
-            : setMapType('standard')
-        }
+        onPress={() => (mapType === 'standard' ? setMapType('satellite') : setMapType('standard'))}
         containerStyle={{
           width: '35%',
           backgroundColor: theme.colors.transparent,
         }}
         buttonStyle={{
           backgroundColor: theme.colors.transparent,
-          borderColor:
-            mapType === 'standard' ? theme.colors.primary : theme.colors.white,
+          borderColor: mapType === 'standard' ? theme.colors.primary : theme.colors.white,
           borderWidth: 1,
         }}
         titleStyle={{
-          color:
-            mapType === 'standard' ? theme.colors.primary : theme.colors.white,
+          color: mapType === 'standard' ? theme.colors.primary : theme.colors.white,
         }}
       />
     </View>

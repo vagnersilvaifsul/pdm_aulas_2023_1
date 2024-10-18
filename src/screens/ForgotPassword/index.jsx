@@ -24,8 +24,7 @@ export default ({navigation}) => {
       if (msgError === 'ok') {
         Alert.alert(
           'Atenção',
-          'Enviamos um email de recuperação de senha para o seguinte endereço:\n' +
-            email,
+          'Enviamos um email de recuperação de senha para o seguinte endereço:\n' + email,
           [{text: 'OK', onPress: () => navigation.goBack()}],
         );
       } else {

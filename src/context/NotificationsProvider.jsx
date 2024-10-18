@@ -32,10 +32,7 @@ export const NotificationsProvider = ({children}) => {
 
     //quando o app está parado (testado, ok)
     messaging().onNotificationOpenedApp(remoteMessage => {
-      console.log(
-        'Notification recebida com o app parado (activity onStop): ',
-        remoteMessage,
-      );
+      console.log('Notification recebida com o app parado (activity onStop): ', remoteMessage);
       if (remoteMessage) {
         setNotification(remoteMessage);
         //TODO: abrir a notification na página correta
@@ -44,10 +41,7 @@ export const NotificationsProvider = ({children}) => {
 
     //quando o app está aberto (testado, ok)
     messaging().onMessage(async remoteMessage => {
-      console.log(
-        'Notification recebida com o app aberto (activity na tela): ',
-        remoteMessage,
-      );
+      console.log('Notification recebida com o app aberto (activity na tela): ', remoteMessage);
       if (remoteMessage) {
         setNotification(remoteMessage);
         switch (remoteMessage.data.route) {
@@ -86,9 +80,5 @@ export const NotificationsProvider = ({children}) => {
     }
   }, [user]);
 
-  return (
-    <NotificationsContext.Provider value={{}}>
-      {children}
-    </NotificationsContext.Provider>
-  );
+  return <NotificationsContext.Provider value={{}}>{children}</NotificationsContext.Provider>;
 };

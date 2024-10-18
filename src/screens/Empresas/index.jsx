@@ -29,11 +29,7 @@ export default ({navigation}) => {
       //   }
       // });
 
-      a.push(
-        ...empresas.filter(e =>
-          e.nome.toLowerCase().includes(text.toLowerCase()),
-        ),
-      );
+      a.push(...empresas.filter(e => e.nome.toLowerCase().includes(text.toLowerCase())));
 
       if (a.length > 0) {
         setEmpresasTemp(a);
@@ -74,9 +70,7 @@ export default ({navigation}) => {
       <SearchBar text="Quem você procura?" setSearch={filterByName} />
       <FlatList
         data={empresasTemp.length > 0 ? empresasTemp : empresas}
-        renderItem={({item}) => (
-          <Item item={item} onPress={() => routeCompany(item)} />
-        )}
+        renderItem={({item}) => <Item item={item} onPress={() => routeCompany(item)} />}
         keyExtractor={item => item.uid}
       />
       <FloatButtonAdd onClick={routeAddCompany} />

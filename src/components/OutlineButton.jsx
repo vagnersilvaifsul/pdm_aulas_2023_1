@@ -12,8 +12,7 @@ export default ({texto, onClick}) => {
     },
     button: {
       backgroundColor: theme.colors.transparent,
-      borderColor:
-        theme.mode === 'light' ? theme.colors.primary : theme.colors.black,
+      borderColor: theme.mode === 'light' ? theme.colors.primary : theme.colors.black,
       borderWidth: 1,
     },
     title: {

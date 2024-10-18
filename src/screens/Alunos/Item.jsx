@@ -11,13 +11,11 @@ export default ({item, onPress}) => {
       alignContent: 'center',
       alignItems: 'center',
       borderRadius: 10,
-      borderColor:
-        theme.mode === 'light' ? theme.colors.primaryDark : theme.colors.black,
+      borderColor: theme.mode === 'light' ? theme.colors.primaryDark : theme.colors.black,
       backgroundColor: theme.colors.background,
     },
     title: {
-      color:
-        theme.mode === 'light' ? theme.colors.primaryDark : theme.colors.black,
+      color: theme.mode === 'light' ? theme.colors.primaryDark : theme.colors.black,
     },
     divider: {
       width: 260,
@@ -34,8 +32,7 @@ export default ({item, onPress}) => {
     },
     nome: {
       textAlign: 'center',
-      color:
-        theme.mode === 'light' ? theme.colors.primaryDark : theme.colors.black,
+      color: theme.mode === 'light' ? theme.colors.primaryDark : theme.colors.black,
       fontSize: 18,
       fontWeight: 'bold',
     },
